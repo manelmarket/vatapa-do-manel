@@ -1,0 +1,1121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vatapá do Manel</title>
+<meta name="description" content="Vatapá de Frango por encomenda com entrega grátis. Faça seu pedido pelo WhatsApp.">
+<meta name="theme-color" content="#3b2316">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#7a1e24">
+<link rel="apple-touch-icon" href="/icones/site-apple-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icones/site-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vatapá Manel">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Vatapá do Manel">
+<meta property="og:title" content="Vatapá do Manel · Vatapá de Frango">
+<meta property="og:description" content="Vatapá de Frango por encomenda, com entrega grátis. Veja a data da próxima entrega e peça aqui!">
+<meta property="og:image:type" content="image/jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vatapá do Manel · Vatapá de Frango">
+<meta name="twitter:description" content="Vatapá de Frango por encomenda, com entrega grátis. Peça aqui!">
+<meta name="twitter:image" content="https://vatapadomanel.pages.dev/prato.jpg">
+<meta property="og:url" content="https://vatapadomanel.pages.dev/">
+<meta property="og:image" content="https://vatapadomanel.pages.dev/prato.jpg">
+<meta property="og:image:width" content="900">
+<meta property="og:image:height" content="423">
+<meta property="og:image:alt" content="Prato de vatapá de frango com arroz branco">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233b2316'/%3E%3Ccircle cx='32' cy='34' r='18' fill='%23f2b10c'/%3E%3Cpath d='M14 34h36' stroke='%233b2316' stroke-width='4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Lilita+One&display=swap">
+<style>
+/* Layout: placa de madeira no topo, foto do prato, selos com data, preço e entrega, e um cartão só com o pedido. */
+:root {
+  --wood: #3b2316;
+  --wood-2: #24140b;
+  --grain-a: rgba(255, 226, 180, .05);
+  --grain-b: rgba(0, 0, 0, .14);
+  --seam: rgba(0, 0, 0, .22);
+  --sign-shadow: rgba(0, 0, 0, .38);
+  --mustard: #f2b10c;
+  --mustard-2: #ffcf4a;
+  --mustard-ink: #351607;
+  --cream: #fff0d2;
+  --burgundy: #7a1b13;
+  --leaf: #1c7a3d;
+  --leaf-2: #155f2f;
+  --leaf-fg: #1c7a3d;
+  --on-strong: #ffffff;
+  --bg: #f5ead5;
+  --surface: #fffaf1;
+  --surface-2: #efe1c6;
+  --line: #e3cfaa;
+  --line-2: #cbb088;
+  --fg: #2a1a10;
+  --fg-2: #6b543f;
+  --fg-3: #957b5f;
+  --focus: #c26a00;
+  --ring: #fbe5b6;
+  --bad-fg: #9b1c12;
+  --toast-bg: #2a1a10;
+  --toast-fg: #fff0d2;
+  --burgundy-fg: #7a1b13;
+  --track: rgba(255, 240, 210, .22);
+  --track-2: rgba(53, 22, 7, .18);
+  --shadow: 0 1px 0 rgba(58, 34, 21, .06), 0 12px 28px -18px rgba(58, 34, 21, .55);
+
+  --f-display: "Lilita One", "Arial Rounded MT Bold", "Arial Black", system-ui, sans-serif;
+  --f-body: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wood: #2d1a0f; --wood-2: #1a0e07;
+    --grain-a: rgba(255, 226, 180, .04); --grain-b: rgba(0, 0, 0, .2); --seam: rgba(0, 0, 0, .3); --sign-shadow: rgba(0, 0, 0, .5);
+    --mustard: #f4b928; --mustard-2: #ffd35e; --mustard-ink: #2b1205;
+    --cream: #ffedc9; --burgundy: #8f2a1d;
+    --leaf: #1f8443; --leaf-2: #186a35; --leaf-fg: #74d394; --on-strong: #ffffff;
+    --bg: #1b120c; --surface: #261910; --surface-2: #33231a; --line: #47321f; --line-2: #64492f;
+    --fg: #f7e8cf; --fg-2: #cbb08f; --fg-3: #9d8467; --focus: #ffcf4a; --ring: #45310c; --bad-fg: #f5a093;
+    --toast-bg: #f7e8cf; --toast-fg: #2a1a10;
+    --burgundy-fg: #f0907f; --track: rgba(255, 237, 201, .2); --track-2: rgba(43, 18, 5, .2);
+    --shadow: 0 1px 0 rgba(0, 0, 0, .35), 0 14px 30px -18px rgba(0, 0, 0, .85);
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 16px/1.5 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, p, dl, dd { margin: 0; }
+button, input, textarea { font: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.gut { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.col { max-width: 560px; margin-inline: auto; }
+.mono { font-family: var(--f-mono); }
+.ico { width: 22px; height: 22px; flex: none; }
+.h2 { font: 800 1.6rem/1.1 var(--f-display); font-synthesis: none; letter-spacing: .01em; text-wrap: balance; }
+
+.sign {
+  background-color: var(--wood);
+  background-image:
+    repeating-linear-gradient(180deg, transparent 0 52px, var(--seam) 52px 54px),
+    repeating-linear-gradient(177deg, var(--grain-a) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(181deg, var(--grain-b) 0 2px, transparent 2px 19px),
+    linear-gradient(180deg, var(--wood) 0%, var(--wood-2) 100%);
+  color: var(--cream);
+}
+.sign-in { padding-block: 26px 28px; text-align: center; }
+.kicker { font: 700 .76rem/1.2 var(--f-body); letter-spacing: .16em; text-transform: uppercase; color: var(--mustard-2); }
+.wordmark {
+  margin-top: 10px;
+  font: 800 clamp(3rem, 14vw, 4.6rem)/.92 var(--f-display);
+  font-synthesis: none;
+  letter-spacing: .01em;
+  text-shadow: 0 3px 0 var(--sign-shadow);
+}
+.wm-a { display: block; color: var(--mustard); }
+.wm-b { display: block; color: var(--cream); }
+.ribbon {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 6px 18px 7px;
+  background: var(--mustard);
+  color: var(--mustard-ink);
+  font: 800 1.3rem/1.1 var(--f-display);
+  font-synthesis: none;
+  letter-spacing: .02em;
+  border-radius: 12px 4px 13px 5px;
+  transform: rotate(-1.6deg);
+  box-shadow: 0 3px 0 var(--sign-shadow);
+}
+.hero-photo { background: var(--wood-2); }
+.hero-photo img { width: 100%; max-width: 900px; margin-inline: auto; aspect-ratio: 900 / 423; object-fit: cover; }
+
+.selos {
+  list-style: none;
+  margin: -30px 0 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.selo {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  min-height: 80px;
+  padding: 10px 6px 12px;
+  border-radius: 16px;
+  background: var(--burgundy);
+  color: var(--cream);
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.selo-k { font: 700 .72rem/1.1 var(--f-body); letter-spacing: .1em; text-transform: uppercase; }
+.selo-v { font: 800 1.7rem/1 var(--f-display); font-synthesis: none; color: var(--mustard); }
+.selo-preco { background: var(--mustard); color: var(--mustard-ink); transform: rotate(-1.5deg); }
+.selo-preco .selo-v { color: var(--burgundy); }
+
+.card {
+  margin-top: 18px;
+  display: grid;
+  gap: 18px;
+  padding: 20px 18px 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+.card:focus { outline: none; }
+.card-head { display: grid; gap: 6px; }
+.lede { color: var(--fg-2); }
+form { display: grid; gap: 16px; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.espera { display: grid; gap: 12px; margin-top: 6px; }
+.espera-t { margin: 0; font-weight: 600; }
+.espera-ok { margin: 10px 0 0; padding: 14px; border-radius: 14px; background: #d8f3df; color: #13502a; font-weight: 700; text-align: center; }
+.cad-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 4px; border-radius: 14px; background: var(--surface-2, #efe1c6); }
+.cad-seg button { min-height: 44px; border: 0; border-radius: 10px; background: transparent; font: 700 .95rem/1.2 inherit; color: inherit; cursor: pointer; }
+.cad-seg button[aria-checked="true"] { background: var(--surface, #fffaf1); box-shadow: 0 1px 4px rgba(58, 34, 21, .18); }
+.cad-busca { display: grid; gap: 6px; }
+.cad-busca label { font-weight: 700; font-size: .98rem; }
+.cad-msg { margin: 0; font-size: .9rem; opacity: .85; }
+.cad-msg.ok { color: #1c7a3d; opacity: 1; font-weight: 700; }
+.cad-msg.nao { color: #9b5a00; opacity: 1; font-weight: 600; }
+.form-oculto .cad-dados { display: none; }
+.field label, .label { font-weight: 700; font-size: .98rem; }
+.err { font-size: .88rem; font-weight: 600; color: var(--bad-fg); }
+.input {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--line-2);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--fg);
+  font-size: 1rem;
+}
+.input::placeholder { color: var(--fg-3); opacity: 1; }
+.input:focus { outline: none; border-color: var(--focus); box-shadow: 0 0 0 3px var(--ring); }
+.input[aria-invalid="true"] { border-color: var(--bad-fg); }
+textarea.input { resize: vertical; min-height: 80px; line-height: 1.4; }
+.qtd-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.stepper { display: inline-flex; border: 1.5px solid var(--line-2); border-radius: 14px; overflow: hidden; background: var(--surface); }
+.stepper button {
+  width: 52px;
+  min-height: 50px;
+  border: 0;
+  background: var(--surface-2);
+  color: var(--fg);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+.stepper button:disabled { color: var(--fg-3); cursor: default; }
+.stepper output { min-width: 56px; display: grid; place-items: center; font: 800 1.35rem/1 var(--f-body); font-variant-numeric: tabular-nums; }
+.total { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--surface-2); }
+.total-k { display: block; font-weight: 800; }
+.total-s { display: block; font-size: .86rem; color: var(--fg-2); }
+.total-v { font: 800 1.55rem/1 var(--f-body); font-variant-numeric: tabular-nums; }
+.micro { margin-top: -6px; font-size: .86rem; color: var(--fg-2); text-align: center; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 14px;
+  font: 700 1rem/1.2 var(--f-body);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-block { width: 100%; }
+.btn-whats { background: var(--leaf); color: var(--on-strong); font-size: 1.06rem; box-shadow: inset 0 -3px 0 var(--leaf-2); }
+.btn-whats:hover { background: var(--leaf-2); }
+.btn-ghost { min-height: 48px; background: var(--surface); color: var(--fg); border: 1.5px solid var(--line-2); }
+.btn-link {
+  justify-self: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 0;
+  background: none;
+  color: var(--fg);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.confirma { gap: 14px; }
+.confirma-k {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: 800 .82rem/1 var(--f-body);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--leaf-fg);
+}
+.horario { margin: 10px 0 0; text-align: center; font-weight: 700; font-size: .98rem; }
+.passo { margin: 0 0 4px; font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; opacity: .7; }
+.opcoes { display: grid; gap: 10px; margin: 14px 0; }
+.opcao { display: grid; gap: 3px; text-align: left; width: 100%; padding: 14px 16px; border-radius: 14px; border: 2px solid var(--line, #e3cfaa); background: var(--surface, #fffaf1); color: inherit; font: inherit; cursor: pointer; }
+.opcao .op-t { font-weight: 800; font-size: 1.04rem; }
+.opcao .op-s { font-size: .9rem; opacity: .8; }
+.opcao[aria-checked="true"] { border-color: #1f6b3a; box-shadow: inset 0 0 0 1px #1f6b3a; background: rgba(31, 107, 58, .08); }
+.opcao[aria-checked="true"] .op-t::before { content: "✓ "; color: #1f6b3a; }
+#pMp, #pEnviar, #pPix, #pTrocoBox { margin-top: 12px; }
+.mp-btn { background: #009ee3; color: #fff; }
+.mp-btn:hover { background: #0086c3; }
+.mp-btn[disabled] { opacity: .7; }
+.mp-volta { margin: 12px 0 0; padding: 14px 16px; border-radius: 14px; font-weight: 700; text-align: center; }
+.mp-volta.ok { background: #d8f3df; color: #13502a; }
+.mp-volta.pendente { background: #fff0c7; color: #5b4300; }
+.mp-volta.erro { background: #fbdcd8; color: #7a1a10; }
+.pix { display: grid; gap: 10px; padding: 14px; border-radius: 14px; border: 2px dashed var(--line, #e3cfaa); }
+.pix h3 { margin: 0; font-size: 1.05rem; }
+.pix p { margin: 0; }
+.pix-chave { font-family: ui-monospace, monospace; font-size: 1.05rem; font-weight: 700; word-break: break-all; padding: 10px 12px; border-radius: 10px; background: var(--surface-2); }
+.resumo { display: grid; gap: 8px; padding: 14px; border-radius: 14px; background: var(--surface-2); }
+.resumo div { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); gap: 10px; }
+.resumo dt { color: var(--fg-2); font-size: .92rem; }
+.resumo dd { font-weight: 600; overflow-wrap: anywhere; }
+.ajuda summary { cursor: pointer; font-weight: 700; padding: 6px 0; }
+.ajuda-in { display: grid; gap: 10px; padding-top: 6px; }
+.msg { font: 400 .84rem/1.45 var(--f-mono); white-space: pre-wrap; }
+.foot { padding-block: 26px 36px; text-align: center; color: var(--fg-2); font-size: .92rem; }
+.foot a { font-family: var(--f-mono); font-weight: 500; color: var(--fg); }
+
+/* faixa de estoque */
+.estoque { background: var(--burgundy); color: var(--cream); }
+.estoque-in { display: grid; gap: 7px; padding-block: 10px 11px; text-align: center; }
+.estoque-t { font-weight: 700; font-size: .98rem; line-height: 1.3; text-wrap: balance; }
+.estoque-t strong { color: var(--mustard); font: 800 1.15rem/1 var(--f-display); font-synthesis: none; }
+.estoque-bar { height: 6px; border-radius: 99px; background: var(--track); overflow: hidden; }
+.estoque-bar span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--mustard); transition: width .4s ease; }
+.estoque.urgente { background: var(--mustard); color: var(--mustard-ink); }
+.estoque.urgente .estoque-t strong { color: var(--burgundy); }
+.estoque.urgente .estoque-bar { background: var(--track-2); }
+.estoque.urgente .estoque-bar span { background: var(--burgundy); }
+.esgotado { text-align: center; }
+.esgotado .h2 { color: var(--burgundy-fg); }
+
+.toast {
+  position: fixed;
+  z-index: 80;
+  left: 50%;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  width: max-content;
+  max-width: calc(100% - 32px);
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: var(--toast-bg);
+  color: var(--toast-fg);
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  transform: translate(-50%, 0);
+  transition: opacity .2s, transform .2s;
+}
+.toast:not(.on) { opacity: 0; pointer-events: none; transform: translate(-50%, 12px); }
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+.app-instalar { position: fixed; left: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 150; border: 0; border-radius: 999px; padding: 10px 16px; font: 700 .95rem/1 system-ui, sans-serif; background: #e8a317; color: #3a1d0b; box-shadow: 0 6px 18px rgba(0,0,0,.25); cursor: pointer; }
+.app-instalar[hidden], .app-ios[hidden] { display: none; }
+.app-ios { position: fixed; left: 12px; right: 12px; bottom: calc(64px + env(safe-area-inset-bottom, 0px)); z-index: 160; max-width: 420px; margin: 0 auto; padding: 14px 16px; border-radius: 16px; background: #fffaf1; color: #2a1a10; box-shadow: 0 10px 30px rgba(0,0,0,.35); font: 400 .98rem/1.45 system-ui, sans-serif; }
+.app-ios p { margin: 0 0 6px; }
+.app-ios button { margin-top: 6px; border: 0; border-radius: 10px; padding: 10px 14px; background: #7a1e24; color: #fff; font-weight: 700; width: 100%; }
+</style>
+</head>
+<body>
+<div class="estoque" id="estoque">
+  <div class="gut">
+    <div class="col estoque-in">
+      <p class="estoque-t" id="estoqueT">Produção limitada: <strong>100</strong> marmitas para domingo</p>
+      <div class="estoque-bar" id="estoqueBar" hidden><span id="estoqueFill"></span></div>
+    </div>
+  </div>
+</div>
+<header class="sign">
+  <div class="gut">
+    <div class="col sign-in">
+      <p class="kicker">Marmitas por encomenda</p>
+      <h1 class="wordmark"><span class="wm-a">Vatapá</span> <span class="wm-b">do Manel</span></h1>
+      <p class="ribbon">Vatapá de Frango</p>
+    </div>
+  </div>
+</header>
+
+<div class="hero-photo">
+  <img src="prato.jpg" width="520" height="244" onerror="this.parentNode.hidden=true" alt="Prato de vatapá de frango com arroz branco, enfeitado com cheiro-verde">
+</div>
+
+<main class="gut">
+  <div class="col">
+    <ul class="selos" aria-label="Data, preço e entrega">
+      <li class="selo"><span class="selo-k">Domingo</span><span class="selo-v">15/11</span></li>
+      <li class="selo selo-preco"><span class="selo-k">A marmita</span><span class="selo-v">R$ 20</span></li>
+      <li class="selo"><span class="selo-k">Entrega</span><span class="selo-v">Grátis</span></li>
+    </ul>
+    <p class="horario">🛵 Entregas a partir das 11h30</p>
+    <p class="mp-volta" id="mpVolta" role="status" hidden></p>
+
+    <section class="card" id="cardPedido" aria-labelledby="tPedido">
+      <div class="card-head">
+        <h2 class="h2" id="tPedido">Faça seu pedido</h2>
+        <p class="lede">Já pediu antes? Toque em <strong>Já comprei antes</strong> e seus dados aparecem sozinhos.</p>
+      </div>
+      <form id="formCliente" novalidate>
+        <div class="cad-seg" role="radiogroup" aria-label="Cadastro">
+          <button type="button" role="radio" aria-checked="true" data-cad="novo">Cadastro novo</button>
+          <button type="button" role="radio" aria-checked="false" data-cad="antigo">Já comprei antes</button>
+        </div>
+        <div class="cad-busca" id="cadBusca" hidden>
+          <label for="bFone">Digite o WhatsApp que você usou no pedido</label>
+          <input class="input" id="bFone" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="20" placeholder="(93) 99999-9999">
+          <p class="cad-msg" id="cadMsg" role="status" aria-live="polite">Assim que o número estiver completo, seus dados aparecem aqui.</p>
+        </div>
+        <div class="field cad-dados">
+          <label for="cNome">Seu nome</label>
+          <input class="input" id="cNome" name="nome" type="text" autocomplete="name" autocapitalize="words" enterkeyhint="next" maxlength="60" aria-describedby="cNomeErr">
+          <p class="err" id="cNomeErr" hidden></p>
+        </div>
+        <div class="field cad-dados">
+          <label for="cFone">Seu WhatsApp</label>
+          <input class="input" id="cFone" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" enterkeyhint="next" maxlength="20" placeholder="(93) 99999-9999" aria-describedby="cFoneErr">
+          <p class="err" id="cFoneErr" hidden></p>
+        </div>
+        <div class="field cad-dados">
+          <label for="cEnd">Endereço de entrega</label>
+          <textarea class="input" id="cEnd" name="endereco" rows="2" autocomplete="street-address" maxlength="160" placeholder="Rua, número e um ponto de referência" aria-describedby="cEndErr"></textarea>
+          <p class="err" id="cEndErr" hidden></p>
+        </div>
+        <div class="field cad-dados">
+          <label for="cBairro">Bairro</label>
+          <input class="input" id="cBairro" name="bairro" type="text" autocomplete="address-level3" enterkeyhint="done" maxlength="40" aria-describedby="cBairroErr">
+          <p class="err" id="cBairroErr" hidden></p>
+        </div>
+        <div class="qtd-row">
+          <span class="label" id="cQtdL">Quantas marmitas?</span>
+          <div class="stepper" role="group" aria-labelledby="cQtdL">
+            <button type="button" id="cMenos" aria-label="Uma marmita a menos">−</button>
+            <output id="cQtd" aria-live="polite">1</output>
+            <button type="button" id="cMais" aria-label="Uma marmita a mais">+</button>
+          </div>
+        </div>
+        <div class="total">
+          <div><span class="total-k">Total</span><span class="total-s">Entrega grátis</span></div>
+          <strong class="total-v" id="cTotal">R$ 20,00</strong>
+        </div>
+        <button type="button" class="btn btn-whats btn-block" id="cEnviar">
+          <span>Finalizar pedido</span>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="micro">Na próxima tela você escolhe como pagar e envia o pedido.</p>
+      </form>
+    </section>
+
+    <section class="card pagar" id="cardPagar" hidden tabindex="-1" aria-labelledby="tPagar">
+      <p class="passo">Passo 2 de 2</p>
+      <h2 class="h2" id="tPagar">Como você quer pagar?</h2>
+      <dl class="resumo" id="pResumo"></dl>
+      <p class="mp-volta" id="pAviso" role="status" hidden></p>
+      <div class="opcoes" id="pOpcoes" role="radiogroup" aria-labelledby="tPagar">
+        <button type="button" class="opcao" role="radio" aria-checked="false" data-pag="mp"><span class="op-t">💳 Pagar agora (cartão ou Pix)</span><span class="op-s">Pelo Mercado Pago, seguro. Depois você envia o pedido no WhatsApp.</span></button>
+        <button type="button" class="opcao" role="radio" aria-checked="false" data-pag="pix"><span class="op-t">⚡ Pix direto para o Manel</span><span class="op-s">Copie a chave, pague no app do banco e mande o comprovante.</span></button>
+        <button type="button" class="opcao" role="radio" aria-checked="false" data-pag="dinheiro"><span class="op-t">💵 Dinheiro na entrega</span><span class="op-s">Diga se precisa de troco.</span></button>
+        <button type="button" class="opcao" role="radio" aria-checked="false" data-pag="cartao"><span class="op-t">💳 Cartão na entrega</span><span class="op-s">Débito ou crédito na hora de receber.</span></button>
+      </div>
+      <div class="pix" id="pPix" hidden>
+        <p>Valor: <strong id="pPixValor"></strong></p>
+        <div class="pix-chave" id="pPixChave"></div>
+        <button type="button" class="btn btn-ghost btn-block" id="pPixCopiar">Copiar chave Pix (só os números)</button>
+      </div>
+      <div class="field" id="pTrocoBox" hidden>
+        <label for="pTroco">Troco para quanto?</label>
+        <input class="input" id="pTroco" type="text" inputmode="numeric" maxlength="12" placeholder="Ex.: 50 (deixe vazio se não precisar)">
+      </div>
+      <button type="button" class="btn btn-block mp-btn" id="pMp" hidden>💳 Ir para o pagamento</button>
+      <a class="btn btn-whats btn-block" id="pEnviar" href="https://wa.me/5593991463982" target="_blank" rel="noopener noreferrer" hidden>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.5c-4.7 0-8.5 3.4-8.5 7.6 0 2.3 1.1 4.3 2.9 5.7l-.9 3.7 3.9-2.1c.8.2 1.7.3 2.6.3 4.7 0 8.5-3.4 8.5-7.6S16.7 3.5 12 3.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <span>Enviar pedido pelo WhatsApp</span>
+      </a>
+      <p class="micro" id="pDica">Escolha uma forma de pagamento para continuar.</p>
+      <button type="button" class="btn-link" id="pVoltar">← Voltar e corrigir o pedido</button>
+    </section>
+
+    <section class="card esgotado" id="cardEsgotado" hidden aria-labelledby="tEsgotado">
+      <h2 class="h2" id="tEsgotado">Esgotado para domingo</h2>
+      <p class="lede" id="esgotadoT">As 50 marmitas deste domingo já foram reservadas.</p>
+      <form class="espera" id="formEspera" novalidate>
+        <p class="espera-t">Entre na lista de espera. Se abrir vaga, o Manel te chama no WhatsApp.</p>
+        <div class="field"><label for="eNome">Seu nome</label><input class="input" id="eNome" type="text" autocomplete="name" maxlength="60"><p class="err" id="eNomeErr" hidden></p></div>
+        <div class="field"><label for="eFone">Seu WhatsApp</label><input class="input" id="eFone" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="20" placeholder="(93) 99999-9999"><p class="err" id="eFoneErr" hidden></p></div>
+        <div class="field"><label for="eQtd">Quantas marmitas você quer?</label><select class="input" id="eQtd"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+        <button type="submit" class="btn btn-whats btn-block" id="eEnviar">Entrar na lista de espera</button>
+      </form>
+      <p class="espera-ok" id="esperaOk" role="status" hidden></p>
+    </section>
+
+    <section class="card confirma" id="cardConfirma" hidden tabindex="-1" aria-labelledby="tConfirma">
+      <p class="confirma-k">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="m8 12.3 2.7 2.7 5.5-5.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Pedido <span class="mono" id="kCod"></span></span>
+      </p>
+      <h2 class="h2" id="tConfirma">Agora é só enviar no WhatsApp</h2>
+      <p>Toque em enviar na conversa do WhatsApp. O pedido fica confirmado quando a mensagem chegar para o Manel.</p>
+      <dl class="resumo" id="kResumo"></dl>
+      <div class="pix" id="kPix" hidden>
+        <h3>Pix direto para o Manel</h3>
+        <p>Valor: <strong id="kPixValor"></strong>. Depois mande o comprovante no WhatsApp.</p>
+        <div class="pix-chave" id="kPixChave"></div>
+        <button type="button" class="btn btn-ghost btn-block" id="kPixCopiar">Copiar chave Pix (só os números)</button>
+      </div>
+      <a class="btn btn-whats btn-block" id="kAbrir" href="https://wa.me/5593991463982" target="_blank" rel="noopener noreferrer">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.5c-4.7 0-8.5 3.4-8.5 7.6 0 2.3 1.1 4.3 2.9 5.7l-.9 3.7 3.9-2.1c.8.2 1.7.3 2.6.3 4.7 0 8.5-3.4 8.5-7.6S16.7 3.5 12 3.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        <span>Abrir o WhatsApp de novo</span>
+      </a>
+      <details class="ajuda">
+        <summary>O WhatsApp não abriu?</summary>
+        <div class="ajuda-in">
+          <p>Copie a mensagem abaixo e mande para <strong class="mono">(93) 99146-3982</strong>.</p>
+          <textarea class="input msg" id="kMsg" rows="9" readonly aria-label="Mensagem do pedido"></textarea>
+          <button type="button" class="btn btn-ghost btn-block" id="kCopiar">Copiar mensagem</button>
+        </div>
+      </details>
+      <button type="button" class="btn-link" id="kOutro">Fazer outro pedido</button>
+    </section>
+
+    <footer class="foot">
+      <p>Dúvidas? WhatsApp <a href="https://wa.me/5593991463982" target="_blank" rel="noopener noreferrer">(93) 99146-3982</a></p>
+    </footer>
+  </div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+"use strict";
+
+const CFG = {
+  marca: "Vatapá do Manel",
+  produto: "Vatapá de Frango",
+  preco: 20,
+  entrega: "domingo, 15/11",
+  entregaTitulo: "Domingo, 15/11",
+  dia: "domingo",
+  horario: "11h30",
+  whats: "5593991463982",
+  ddd: "93",
+  links: { 1: "Vatapá do Manel 1", 2: "Vatapá do Manel 2" },
+  /* Chave Pix mostrada na confirmação (deixe vazio para esconder) */
+  pix: "03423197285",
+  pixTipo: "CPF",
+  pixMostra: "034.231.972-85",
+  /* Banco das pré-reservas (a chave anon é pública por desenho: só consegue gravar) */
+  banco: { url: "https://guitoqplaibauyxxnump.supabase.co", chave: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd1aXRvcXBsYWliYXV5eHhudW1wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzMTgyNjEsImV4cCI6MjEwODg5NDI2MX0.CU6JK6thqsKEsb_FJUPzhyqDxcfawIAj-1Dg7RDo_p4" },
+};
+
+/* MENSAGEM-INICIO: o formato abaixo é o mesmo que o painel lê em "Colar pedido do WhatsApp" */
+const INVISIVEIS = /[\u200b-\u200f\u202a-\u202e\u2060-\u2069\ufeff]/g;
+const brlFmt = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+function brl(n) { return brlFmt.format(Number(n) || 0); }
+function plural(n, um, varios) { return n + " " + (n === 1 ? um : varios); }
+function limpa(s, max) {
+  return String(s == null ? "" : s)
+    .replace(INVISIVEIS, "")
+    .replace(/\s*[,;]?\s*[\r\n]+\s*/g, ", ")
+    .replace(/\s+/g, " ")
+    .replace(/^[\s,;.\-–]+/, "")
+    .replace(/[\s,;]+$/, "")
+    .slice(0, max || 200)
+    .trim();
+}
+function normFone(s, ddd) {
+  let d = String(s == null ? "" : s).replace(/\D/g, "").replace(/^0+/, "");
+  if (d.length >= 12 && d.startsWith("55")) d = d.slice(2);
+  if ((d.length === 8 || d.length === 9) && ddd) d = ddd + d;
+  return d.length === 10 || d.length === 11 ? d : "";
+}
+function fmtFone(d) {
+  d = String(d == null ? "" : d).replace(/\D/g, "");
+  if (d.length === 11) return "(" + d.slice(0, 2) + ") " + d.slice(2, 7) + "-" + d.slice(7);
+  if (d.length === 10) return "(" + d.slice(0, 2) + ") " + d.slice(2, 6) + "-" + d.slice(6);
+  return d;
+}
+function montarMensagem(p, cfg) {
+  return [
+    "*NOVO PEDIDO · " + cfg.marca.toUpperCase() + "*",
+    "Pedido: #" + p.codigo,
+    "",
+    "Nome: " + p.nome,
+    "WhatsApp: " + fmtFone(p.whatsapp),
+    "Endereço: " + p.endereco,
+    "Quantidade: " + plural(p.qtd, "marmita", "marmitas") + " de " + cfg.produto,
+    "Total: " + brl(p.qtd * cfg.preco) + " (entrega grátis)",
+    p.pagamento ? "Pagamento: " + p.pagamento : null,
+    "Entrega: " + cfg.entrega,
+    p.link ? "Link: " + ((cfg.links && cfg.links[p.link]) || "Vatapá do Manel " + p.link) : null,
+  ].filter((x) => x !== null).join("\n");
+}
+/* MENSAGEM-FIM */
+
+const $ = (id) => document.getElementById(id);
+const ALFA = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+function gerarCodigo() {
+  const a = new Uint8Array(5);
+  if (window.crypto && crypto.getRandomValues) crypto.getRandomValues(a);
+  else for (let i = 0; i < a.length; i++) a[i] = Math.floor(Math.random() * 256);
+  let s = "";
+  for (const x of a) s += ALFA[x % ALFA.length];
+  return s;
+}
+const guarda = {
+  ler(k) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } },
+  gravar(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* sem armazenamento */ } },
+};
+
+let toastTimer = 0;
+function toast(msg) {
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("on");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("on"), 3200);
+}
+
+function setErro(id, msg) {
+  const campo = $(id), err = $(id + "Err");
+  err.textContent = msg || "";
+  err.hidden = !msg;
+  if (msg) campo.setAttribute("aria-invalid", "true");
+  else campo.removeAttribute("aria-invalid");
+  return !msg;
+}
+
+/* Qual link trouxe o cliente: ?v=1 (seu) ou ?v=2 (vendedora).
+   Sem número no endereço, vale o último link que essa pessoa abriu; se nunca abriu nenhum, conta como link 1. */
+function lerLink() {
+  let v = null;
+  try { v = new URLSearchParams(location.search).get("v"); } catch (e) { v = null; }
+  if (!v) {
+    const m = location.hash.match(/^#([12])$/);
+    if (m) v = m[1];
+  }
+  if (v === "1" || v === "2") {
+    guarda.gravar("vdm-link", Number(v));
+    return Number(v);
+  }
+  const salvo = Number(guarda.ler("vdm-link"));
+  return salvo === 1 || salvo === 2 ? salvo : 1;
+}
+
+const estado = { codigo: gerarCodigo(), qtd: 1, tentou: false, link: lerLink(), max: 30, esgotado: false };
+
+function validar(focar) {
+  const nome = limpa($("cNome").value, 60);
+  const fone = normFone($("cFone").value, CFG.ddd);
+  const rua = limpa($("cEnd").value, 160);
+  const bairro = limpa($("cBairro").value, 40);
+  const end = rua + " · Bairro: " + bairro;
+  const ok = [
+    setErro("cNome", nome.length >= 2 ? "" : "Escreva seu nome."),
+    setErro("cFone", fone ? "" : "Escreva seu WhatsApp com DDD. Exemplo: (93) 99123-4567."),
+    setErro("cEnd", rua.length >= 6 ? "" : "Escreva a rua e o número."),
+    setErro("cBairro", bairro.length >= 2 ? "" : "Escreva o bairro."),
+  ];
+  if (ok.every(Boolean)) return { codigo: estado.codigo, nome, whatsapp: fone, endereco: end, qtd: estado.qtd, link: estado.link };
+  if (focar) $(["cNome", "cFone", "cEnd", "cBairro"][ok.indexOf(false)]).focus();
+  return null;
+}
+function atualizar() {
+  $("cQtd").textContent = estado.qtd;
+  $("cTotal").textContent = brl(estado.qtd * CFG.preco);
+  $("cMenos").disabled = estado.qtd <= 1;
+  $("cMais").disabled = estado.qtd >= estado.max;
+}
+
+/* Estoque: o site lê o arquivo estoque.txt (total e vendidas), que você atualiza no Neocities. */
+function mostrarEstoque(total, vendidas) {
+  const restam = Math.max(0, total - vendidas);
+  const forte = (n) => { const s = document.createElement("strong"); s.textContent = String(n); return s; };
+  const t = $("estoqueT");
+  $("estoque").classList.toggle("urgente", restam > 0 && restam <= 10);
+  const dia = CFG.dia;
+  if (estado.fechado) t.replaceChildren("Vendas encerradas para " + dia);
+  else if (restam === 0) t.replaceChildren("Esgotado: as ", forte(total), " marmitas de " + dia + " já foram reservadas");
+  else if (restam === 1) t.replaceChildren("Resta só ", forte(1), " marmita para " + dia);
+  else if (restam <= 10) t.replaceChildren("Últimas ", forte(restam), " marmitas para " + dia);
+  else t.replaceChildren("Restam ", forte(restam), " de " + total + " marmitas para " + dia);
+  $("estoqueBar").hidden = false;
+  $("estoqueFill").style.width = (Math.min(vendidas, total) / total) * 100 + "%";
+  estado.max = Math.max(1, Math.min(30, restam));
+  if (estado.qtd > estado.max) estado.qtd = estado.max;
+  estado.esgotado = restam === 0 || !!estado.fechado;
+  $("tEsgotado").textContent = estado.fechado ? "Vendas encerradas" : "Esgotado para " + CFG.dia;
+  $("esgotadoT").textContent = estado.fechado ? "As vendas para " + CFG.entrega + " foram encerradas. Chame o Manel no WhatsApp para saber da próxima." : "As " + total + " marmitas de " + CFG.entrega + " já foram reservadas.";
+  if (estado.esgotado && $("cardConfirma").hidden) {
+    $("cardPedido").hidden = true;
+    $("cardEsgotado").hidden = false;
+  }
+  atualizar();
+}
+/* Venda configurada no painel: data, horário, preço e estoque vêm do banco. */
+const DIAS_SEMANA = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
+function aplicarVenda(v) {
+  const [y, m, d] = String(v.data || "").split("-").map(Number);
+  if (!y || !m || !d) return;
+  const dt = new Date(y, m - 1, d);
+  const dd = String(d).padStart(2, "0") + "/" + String(m).padStart(2, "0");
+  const dia = DIAS_SEMANA[dt.getDay()];
+  CFG.dia = dia;
+  CFG.vendaData = v.data;
+  CFG.entrega = dia + ", " + dd;
+  CFG.entregaTitulo = dia.charAt(0).toUpperCase() + dia.slice(1) + ", " + dd;
+  if (Number(v.preco) > 0) CFG.preco = Number(v.preco);
+  if (v.horario) CFG.horario = String(v.horario).slice(0, 10);
+  if (v.produto) CFG.produto = String(v.produto).slice(0, 40);
+  estado.fechado = v.aberta === false;
+  const selos = document.querySelectorAll(".selos .selo");
+  if (selos[0]) { selos[0].querySelector(".selo-k").textContent = dia.charAt(0).toUpperCase() + dia.slice(1); selos[0].querySelector(".selo-v").textContent = dd; }
+  if (selos[1]) selos[1].querySelector(".selo-v").textContent = Number.isInteger(CFG.preco) ? "R$ " + CFG.preco : brl(CFG.preco);
+  const hr = document.querySelector(".horario");
+  if (hr) hr.textContent = "🛵 Entregas a partir das " + CFG.horario;
+  const rib = document.querySelector(".ribbon");
+  if (rib) rib.textContent = CFG.produto;
+  atualizar();
+}
+async function carregarEstoque() {
+  try {
+    const rv = await fetch(CFG.banco.url + "/rest/v1/rpc/venda_publica", {
+      method: "POST", cache: "no-store",
+      headers: { apikey: CFG.banco.chave, Authorization: "Bearer " + CFG.banco.chave, "Content-Type": "application/json" },
+      body: "{}",
+    });
+    if (rv.ok) {
+      const v = await rv.json();
+      if (v && v.data) {
+        aplicarVenda(v);
+        if (Number(v.total) > 0 && Number(v.vendidas) >= 0) { mostrarEstoque(Number(v.total), Number(v.vendidas)); return; }
+      }
+    }
+  } catch (e) { /* tenta o estoque antigo */ }
+  try {
+    const rb = await fetch(CFG.banco.url + "/rest/v1/rpc/estoque_publico", {
+      method: "POST", cache: "no-store",
+      headers: { apikey: CFG.banco.chave, Authorization: "Bearer " + CFG.banco.chave, "Content-Type": "application/json" },
+      body: "{}",
+    });
+    if (rb.ok) {
+      const j = await rb.json();
+      if (j && j.total > 0 && j.vendidas >= 0) { mostrarEstoque(j.total, j.vendidas); return; }
+    }
+  } catch (e) { /* cai para o arquivo */ }
+  try {
+    const r = await fetch("estoque.txt?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) return;
+    const txt = await r.text();
+    const total = parseInt((txt.match(/total\D*(\d+)/i) || [])[1], 10);
+    const vendidas = parseInt((txt.match(/vendidas\D*(\d+)/i) || [])[1], 10);
+    if (total > 0 && vendidas >= 0) mostrarEstoque(total, vendidas);
+  } catch (e) { /* sem o arquivo, fica o aviso de produção limitada */ }
+}
+/* Grava a pré-reserva no banco. Se falhar, nada muda: o pedido segue pelo WhatsApp do mesmo jeito. */
+function registrarPreReserva(p) {
+  try {
+    fetch(CFG.banco.url + "/rest/v1/pedidos_site", {
+      method: "POST",
+      keepalive: true,
+      headers: { apikey: CFG.banco.chave, Authorization: "Bearer " + CFG.banco.chave, "Content-Type": "application/json", Prefer: "return=minimal" },
+      body: JSON.stringify({ codigo: p.codigo, nome: p.nome, whatsapp: p.whatsapp, endereco: p.endereco, qtd: p.qtd, link: p.link === 1 || p.link === 2 ? p.link : null, pagamento: p.pagamento || null }),
+    }).catch(() => {});
+  } catch (e) { /* sem rede: segue só com o WhatsApp */ }
+}
+/* Monitoramento do link: sem IP, só um id anônimo do aparelho, o link usado e de onde veio. Se falhar, nada muda para o cliente. */
+const RASTRO = { vid: null, feitos: {} };
+function rastroId() {
+  if (RASTRO.vid) return RASTRO.vid;
+  let v = null;
+  try { v = localStorage.getItem("vdm-vid"); } catch (e) { v = null; }
+  if (!v) {
+    v = "v" + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+    try { localStorage.setItem("vdm-vid", v); } catch (e) { /* sem armazenamento */ }
+  }
+  RASTRO.vid = v;
+  return v;
+}
+function rastroOrigem() {
+  let utm = "";
+  try { utm = (new URLSearchParams(location.search).get("utm_source") || "").toLowerCase(); } catch (e) { utm = ""; }
+  let ref = "";
+  try { ref = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, "").toLowerCase() : ""; } catch (e) { ref = ""; }
+  const t = utm || ref;
+  if (!t) return "Direto ou WhatsApp";
+  if (/instagram/.test(t)) return "Instagram";
+  if (/facebook|fb\.com|fbclid/.test(t)) return "Facebook";
+  if (/whatsapp|wa\.me/.test(t)) return "WhatsApp";
+  if (/google/.test(t)) return "Google";
+  if (/t\.co|twitter|x\.com/.test(t)) return "X / Twitter";
+  if (/pages\.dev/.test(t)) return "Direto ou WhatsApp";
+  return t.slice(0, 40);
+}
+function rastroAparelho() {
+  const ua = navigator.userAgent || "";
+  const so = /iPhone|iPad/.test(ua) ? "iPhone" : /Android/.test(ua) ? "Android" : /Windows/.test(ua) ? "Windows" : /Mac/.test(ua) ? "Mac" : "Outro";
+  const app = /Instagram/.test(ua) ? " (app Instagram)" : /FBAN|FBAV|FB_IAB/.test(ua) ? " (app Facebook)" : "";
+  return so + app;
+}
+function rastrear(evento) {
+  try {
+    const chave = evento + ":" + estado.link;
+    if (RASTRO.feitos[chave] && evento !== "enviou") return;
+    RASTRO.feitos[chave] = true;
+    let fuso = "";
+    try { fuso = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (e) { fuso = ""; }
+    fetch(CFG.banco.url + "/rest/v1/rpc/registrar_visita", {
+      method: "POST", keepalive: true,
+      headers: { apikey: CFG.banco.chave, Authorization: "Bearer " + CFG.banco.chave, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_link: estado.link || 0, p_vid: rastroId(), p_evento: evento, p_origem: rastroOrigem(), p_dispositivo: rastroAparelho(), p_idioma: (navigator.language || "").slice(0, 12), p_fuso: fuso }),
+    }).catch(() => {});
+  } catch (e) { /* sem rastro: o pedido segue normal */ }
+}
+function linkWhats(texto) {
+  return "https://wa.me/" + CFG.whats + "?text=" + encodeURIComponent(texto);
+}
+
+$("cMenos").addEventListener("click", () => { estado.qtd = Math.max(1, estado.qtd - 1); atualizar(); });
+$("cMais").addEventListener("click", () => { estado.qtd = Math.min(estado.max, estado.qtd + 1); atualizar(); });
+["cNome", "cFone", "cEnd", "cBairro"].forEach((id) => $(id).addEventListener("input", () => { rastrear("iniciou"); if (estado.tentou) validar(false); }));
+$("cFone").addEventListener("blur", () => {
+  const f = normFone($("cFone").value, CFG.ddd);
+  if (f) $("cFone").value = fmtFone(f);
+});
+$("cNome").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); $("cFone").focus(); } });
+$("cFone").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); $("cEnd").focus(); } });
+$("formCliente").addEventListener("submit", (e) => e.preventDefault());
+
+/* ---------- passo 2: escolher o pagamento e só depois enviar ---------- */
+const PAG_TXT = { mp: "Mercado Pago (cartão ou Pix online)", pix: "Pix direto (vou mandar o comprovante)", dinheiro: "Dinheiro na entrega", cartao: "Cartão na entrega" };
+function linhaResumo(k, v) {
+  const div = document.createElement("div"), dt = document.createElement("dt"), dd = document.createElement("dd");
+  dt.textContent = k; dd.textContent = v; div.append(dt, dd); return div;
+}
+function textoPagamento() {
+  const f = estado.pag;
+  if (!f) return "";
+  if (f === "mpok") return "PAGO pelo Mercado Pago ✅";
+  if (f === "mppend") return "Mercado Pago (pagamento em análise)";
+  if (f === "dinheiro") { const t = limpa($("pTroco").value, 12).replace(/[^\d,.]/g, ""); return t ? "Dinheiro na entrega · troco para R$ " + t : "Dinheiro na entrega · sem troco"; }
+  return PAG_TXT[f];
+}
+function abrirPagar(p) {
+  estado.pedido = p;
+  $("pResumo").replaceChildren(
+    linhaResumo("Pedido", plural(p.qtd, "marmita", "marmitas") + " de " + CFG.produto),
+    linhaResumo("Total", brl(p.qtd * CFG.preco) + ", entrega grátis"),
+    linhaResumo("Entrega", CFG.entregaTitulo + ", a partir das " + CFG.horario),
+    linhaResumo("Endereço", p.endereco),
+  );
+  $("cardPedido").hidden = true;
+  $("cardConfirma").hidden = true;
+  $("cardPagar").hidden = false;
+  $("cardPagar").focus({ preventScroll: true });
+  $("cardPagar").scrollIntoView({ block: "start" });
+  atualizarPagar();
+}
+function atualizarPagar() {
+  const p = estado.pedido;
+  if (!p) return;
+  const f = estado.pag;
+  const pagoMp = f === "mpok" || f === "mppend";
+  $("pOpcoes").hidden = pagoMp;
+  $("pOpcoes").querySelectorAll(".opcao").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.pag === f)));
+  $("pPix").hidden = f !== "pix" || !CFG.pix;
+  if (CFG.pix) { $("pPixChave").textContent = CFG.pixTipo + ": " + CFG.pixMostra; $("pPixValor").textContent = brl(p.qtd * CFG.preco); }
+  $("pTrocoBox").hidden = f !== "dinheiro";
+  $("pMp").hidden = f !== "mp";
+  $("pEnviar").hidden = !f || f === "mp";
+  $("pDica").textContent = !f ? "Escolha uma forma de pagamento para continuar."
+    : f === "mp" ? "Você paga no Mercado Pago e volta para cá para enviar o pedido."
+    : pagoMp ? "Último passo: envie o pedido no WhatsApp para o Manel."
+    : "O WhatsApp abre com o pedido escrito. Falta só você tocar em enviar.";
+  $("pVoltar").hidden = pagoMp;
+  if ($("pEnviar").hidden) return;
+  const q = { ...p, pagamento: textoPagamento() };
+  $("pEnviar").href = linkWhats(montarMensagem(q, CFG));
+}
+$("cEnviar").addEventListener("click", () => {
+  if ($("formCliente").classList.contains("form-oculto")) { $("bFone").focus(); toast("Digite seu WhatsApp para achar seu cadastro, ou escolha Cadastro novo."); return; }
+  estado.tentou = true;
+  const p = validar(true);
+  if (!p) return;
+  if (estado.enviado) { estado.codigo = gerarCodigo(); p.codigo = estado.codigo; estado.enviado = false; }
+  estado.pag = null;
+  $("pTroco").value = "";
+  $("pAviso").hidden = true;
+  guarda.gravar("vdm-cliente", { nome: p.nome, whatsapp: p.whatsapp, endereco: limpa($("cEnd").value, 160), bairro: limpa($("cBairro").value, 40) });
+  rastrear("iniciou");
+  abrirPagar(p);
+});
+$("pOpcoes").addEventListener("click", (e) => {
+  const b = e.target.closest(".opcao");
+  if (!b) return;
+  estado.pag = b.dataset.pag;
+  atualizarPagar();
+  if (estado.pag === "dinheiro") $("pTroco").focus();
+});
+$("pTroco").addEventListener("input", atualizarPagar);
+$("pPixCopiar").addEventListener("click", () => {
+  const falhou = () => toast("Selecione a chave e copie pelo celular.");
+  try { navigator.clipboard.writeText(CFG.pix).then(() => toast("Chave Pix copiada."), falhou); }
+  catch (e) { falhou(); }
+});
+$("pVoltar").addEventListener("click", () => {
+  $("cardPagar").hidden = true;
+  $("cardPedido").hidden = false;
+  $("cardPedido").scrollIntoView({ block: "start" });
+});
+$("pEnviar").addEventListener("click", () => {
+  const p = { ...estado.pedido, pagamento: textoPagamento() };
+  const msg = montarMensagem(p, CFG);
+  const url = linkWhats(msg);
+  $("pEnviar").href = url;
+  if (!estado.enviado) { registrarPreReserva(p); rastrear("enviou"); }
+  estado.enviado = true;
+  try { localStorage.removeItem("vdm-pendente"); } catch (e) { /* sem armazenamento */ }
+  setTimeout(() => { $("cardPagar").hidden = true; mostrarConfirmacao(p, msg, url); }, 80);
+});
+$("pMp").addEventListener("click", async () => {
+  const p = { ...estado.pedido, pagamento: PAG_TXT.mp };
+  const b = $("pMp");
+  b.disabled = true;
+  b.textContent = "Abrindo o Mercado Pago…";
+  registrarPreReserva(p);
+  estado.enviado = true;
+  rastrear("enviou");
+  guarda.gravar("vdm-pendente", { p: estado.pedido, em: Date.now() });
+  try {
+    const r = await fetch(CFG.banco.url + "/functions/v1/mp-checkout", {
+      method: "POST",
+      headers: { apikey: CFG.banco.chave, Authorization: "Bearer " + CFG.banco.chave, "Content-Type": "application/json" },
+      body: JSON.stringify({ codigo: p.codigo }),
+    });
+    const d = await r.json();
+    if (!r.ok || !d.url) throw new Error("sem link");
+    location.href = d.url;
+  } catch (e) {
+    b.disabled = false;
+    b.textContent = "💳 Ir para o pagamento";
+    toast("Não deu para abrir o pagamento agora. Escolha Pix direto ou pague na entrega.");
+  }
+});
+
+function mostrarConfirmacao(p, msg, url) {
+  const linha = (k, v) => {
+    const div = document.createElement("div");
+    const dt = document.createElement("dt");
+    const dd = document.createElement("dd");
+    dt.textContent = k;
+    dd.textContent = v;
+    div.append(dt, dd);
+    return div;
+  };
+  $("kCod").textContent = "#" + p.codigo;
+  $("kResumo").replaceChildren(
+    linha("Pedido", plural(p.qtd, "marmita", "marmitas") + " de " + CFG.produto),
+    linha("Total", brl(p.qtd * CFG.preco) + ", entrega grátis"),
+    linha("Entrega", CFG.entregaTitulo + ", a partir das " + CFG.horario),
+    linha("Endereço", p.endereco),
+    linha("Nome", p.nome),
+    linha("Pagamento", p.pagamento || "—"),
+  );
+  estado.ultimo = p;
+  $("kAbrir").href = url;
+  $("kPix").hidden = !CFG.pix || !/^Pix direto/.test(p.pagamento || "");
+  if (CFG.pix) { $("kPixChave").textContent = CFG.pixTipo + ": " + CFG.pixMostra; $("kPixValor").textContent = brl(p.qtd * CFG.preco); }
+  $("kMsg").value = msg;
+  $("cardPedido").hidden = true;
+  $("cardConfirma").hidden = false;
+  $("cardConfirma").focus({ preventScroll: true });
+  $("cardConfirma").scrollIntoView({ block: "start" });
+}
+
+$("kCopiar").addEventListener("click", () => {
+  const campo = $("kMsg");
+  const falhou = () => { campo.focus(); campo.select(); toast("Texto selecionado. Use o Copiar do seu celular."); };
+  try { navigator.clipboard.writeText(campo.value).then(() => toast("Mensagem copiada."), falhou); }
+  catch (e) { falhou(); }
+});
+$("kPixCopiar").addEventListener("click", () => {
+  const falhou = () => toast("Selecione a chave e copie pelo celular.");
+  try { navigator.clipboard.writeText(CFG.pix).then(() => toast("Chave Pix copiada."), falhou); }
+  catch (e) { falhou(); }
+});
+$("kOutro").addEventListener("click", () => {
+  estado.codigo = gerarCodigo();
+  estado.enviado = false;
+  estado.qtd = 1;
+  estado.tentou = false;
+  estado.link = lerLink();
+  atualizar();
+  $("cardConfirma").hidden = true;
+  $("cardPagar").hidden = true;
+  estado.pag = null;
+  if (estado.esgotado) {
+    $("cardEsgotado").hidden = false;
+    return;
+  }
+  $("cardPedido").hidden = false;
+  $("cardPedido").scrollIntoView({ block: "start" });
+  $("cNome").focus({ preventScroll: true });
+  carregarEstoque();
+});
+
+/* ---------- lista de espera ---------- */
+$("formEspera").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const nome = limpa($("eNome").value, 60);
+  const fone = normFone($("eFone").value, CFG.ddd);
+  const ok = [setErro("eNome", nome.length >= 2 ? "" : "Escreva seu nome."), setErro("eFone", fone ? "" : "Escreva seu WhatsApp com DDD.")];
+  if (!ok.every(Boolean)) { $(ok[0] ? "eFone" : "eNome").focus(); return; }
+  const b = $("eEnviar");
+  b.disabled = true; b.textContent = "Enviando…";
+  try {
+    const r = await fetch(CFG.banco.url + "/rest/v1/lista_espera", {
+      method: "POST",
+      headers: { apikey: CFG.banco.chave, Authorization: "Bearer " + CFG.banco.chave, "Content-Type": "application/json", Prefer: "return=minimal" },
+      body: JSON.stringify({ venda: CFG.vendaData || "2026-11-15", nome, whatsapp: fone, qtd: Number($("eQtd").value) || 1 }),
+    });
+    if (!r.ok) throw new Error("http " + r.status);
+    $("formEspera").hidden = true;
+    $("esperaOk").hidden = false;
+    $("esperaOk").textContent = "✅ Pronto, " + nome.split(" ")[0] + "! Você está na lista de espera. Se abrir vaga, o Manel te chama no WhatsApp.";
+    guarda.gravar("vdm-cliente", { ...(guarda.ler("vdm-cliente") || {}), nome, whatsapp: fone });
+  } catch (er) {
+    b.disabled = false; b.textContent = "Entrar na lista de espera";
+    toast("Não deu para entrar na lista agora. Tente de novo ou chame o Manel no WhatsApp.");
+  }
+});
+(function preencherEspera() {
+  const c = guarda.ler("vdm-cliente");
+  if (c) { if (c.nome) $("eNome").value = c.nome; if (c.whatsapp) $("eFone").value = fmtFone(c.whatsapp); }
+})();
+
+/* ---------- "Já comprei antes": busca o cadastro pelo WhatsApp ---------- */
+const CAD = { modo: "novo", ultimo: "", timer: 0 };
+function modoCadastro(m) {
+  CAD.modo = m;
+  document.querySelectorAll(".cad-seg button").forEach((b) => b.setAttribute("aria-checked", String(b.dataset.cad === m)));
+  $("cadBusca").hidden = m !== "antigo";
+  const achou = $("cadMsg").classList.contains("ok") || $("cadMsg").classList.contains("nao");
+  $("formCliente").classList.toggle("form-oculto", m === "antigo" && !achou);
+  if (m === "antigo") $("bFone").focus();
+  else if (CAD.limpar) { ["cNome", "cFone", "cEnd", "cBairro"].forEach((id) => { $(id).value = ""; }); CAD.limpar = false; }
+}
+document.querySelectorAll(".cad-seg button").forEach((b) => b.addEventListener("click", () => modoCadastro(b.dataset.cad)));
+async function buscarCadastro() {
+  const fone = normFone($("bFone").value, CFG.ddd);
+  const msg = $("cadMsg");
+  if (!fone) { msg.className = "cad-msg"; msg.textContent = "Assim que o número estiver completo, seus dados aparecem aqui."; return; }
+  if (fone === CAD.ultimo) return;
+  CAD.ultimo = fone;
+  msg.className = "cad-msg"; msg.textContent = "Procurando seu cadastro…";
+  let c = null;
+  try {
+    const r = await fetch(CFG.banco.url + "/rest/v1/rpc/cliente_por_whatsapp", {
+      method: "POST",
+      headers: { apikey: CFG.banco.chave, Authorization: "Bearer " + CFG.banco.chave, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_whatsapp: fone }),
+    });
+    if (r.ok) { const t = await r.text(); c = t && t !== "null" ? JSON.parse(t) : null; }
+  } catch (e) { c = null; }
+  if (CAD.ultimo !== fone) return;
+  $("cFone").value = fmtFone(fone);
+  if (c && c.nome) {
+    const end = String(c.endereco || "");
+    const m = end.match(/^(.*?)\s*·\s*Bairro:\s*(.+)$/i);
+    $("cNome").value = c.nome;
+    $("cEnd").value = m ? m[1] : end;
+    $("cBairro").value = m ? m[2] : "";
+    CAD.limpar = true;
+    msg.className = "cad-msg ok";
+    msg.textContent = "✅ Achamos seu cadastro, " + String(c.nome).split(" ")[0] + "! Confira o endereço abaixo e escolha a quantidade.";
+  } else {
+    msg.className = "cad-msg nao";
+    msg.textContent = "Não achamos pedido com esse número. Preencha seus dados abaixo, é rapidinho.";
+  }
+  $("formCliente").classList.remove("form-oculto");
+  if (estado.tentou) validar(false);
+}
+$("bFone").addEventListener("input", () => { clearTimeout(CAD.timer); CAD.timer = setTimeout(buscarCadastro, 350); });
+$("bFone").addEventListener("blur", () => { const f = normFone($("bFone").value, CFG.ddd); if (f) $("bFone").value = fmtFone(f); });
+
+const salvo = guarda.ler("vdm-cliente");
+if (salvo) {
+  if (!$("cNome").value) $("cNome").value = salvo.nome || "";
+  if (!$("cFone").value && salvo.whatsapp) $("cFone").value = fmtFone(salvo.whatsapp);
+  if (!$("cEnd").value) $("cEnd").value = salvo.endereco || "";
+  if (!$("cBairro").value) $("cBairro").value = salvo.bairro || "";
+  if (salvo.nome) {
+    modoCadastro("antigo");
+    if (salvo.whatsapp) { $("bFone").value = fmtFone(salvo.whatsapp); CAD.ultimo = salvo.whatsapp; }
+    $("cadMsg").className = "cad-msg ok";
+    $("cadMsg").textContent = "✅ Seus dados deste celular já estão preenchidos, " + String(salvo.nome).split(" ")[0] + ". Confira abaixo.";
+    $("formCliente").classList.remove("form-oculto");
+  }
+}
+atualizar();
+(function voltaMercadoPago() {
+  let st = "";
+  try { st = new URLSearchParams(location.search).get("mp") || ""; } catch (e) { st = ""; }
+  if (!st) return;
+  try { history.replaceState(null, "", location.pathname); } catch (e) { /* sem histórico */ }
+  const pend = guarda.ler("vdm-pendente");
+  const aviso = $("pAviso");
+  if (!pend || !pend.p) {
+    const el = $("mpVolta");
+    el.className = "mp-volta " + (st === "ok" ? "ok" : st === "pendente" ? "pendente" : "erro");
+    el.textContent = st === "ok" ? "✅ Pagamento aprovado! Obrigado." : st === "pendente" ? "⏳ Pagamento em análise no Mercado Pago." : "O pagamento não foi concluído. Você pode pagar na entrega.";
+    el.hidden = false;
+    return;
+  }
+  estado.codigo = pend.p.codigo;
+  estado.enviado = true;
+  if (st === "ok") { estado.pag = "mpok"; aviso.className = "mp-volta ok"; aviso.textContent = "✅ Pagamento aprovado! Agora envie o pedido no WhatsApp para o Manel."; }
+  else if (st === "pendente") { estado.pag = "mppend"; aviso.className = "mp-volta pendente"; aviso.textContent = "⏳ Pagamento em análise. Envie o pedido no WhatsApp; quando aprovar, o Manel é avisado."; }
+  else { estado.pag = null; aviso.className = "mp-volta erro"; aviso.textContent = "O pagamento não foi concluído. Escolha outra forma ou tente de novo."; }
+  aviso.hidden = false;
+  abrirPagar(pend.p);
+})();
+rastrear("visita");
+carregarEstoque();
+setInterval(() => { if (!document.hidden) carregarEstoque(); }, 30000);
+})();
+/* ---------- app instalável (atalho na tela do celular) ---------- */
+(function appInstalavel() {
+  try { if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("/sw.js").catch(() => {}); } catch (e) { /* sem app */ }
+})();
+</script>
+</body>
+</html>
