@@ -1,0 +1,1793 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel do Manel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="/painel/manifest.webmanifest">
+<meta name="theme-color" content="#7a1e24">
+<link rel="apple-touch-icon" href="/icones/painel-apple-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icones/painel-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Painel Manel">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>
+:root {
+  --bg: #f5f3ef; --surface: #ffffff; --surface-2: #f0ece5; --line: #e4ddd2; --line-2: #d3c9ba;
+  --fg: #1d1915; --muted: #6d645b; --faint: #9a9087;
+  --brand: #7a1e24; --brand-2: #5d161b; --brand-soft: #f6e7e5; --on-brand: #fff;
+  --accent: #e8a317; --accent-soft: #fdf1d6;
+  --ok: #1d7a45; --ok-bg: #e2f3e8; --warn: #8f5d00; --warn-bg: #fff1d1; --bad: #b42318; --bad-bg: #fde6e3;
+  --info: #1f5fa6; --info-bg: #e3eefb; --neutral: #5f5a55; --neutral-bg: #ece8e2;
+  --whats: #1f7a45;
+  --radius: 14px; --shadow: 0 1px 2px rgba(40, 25, 15, .06), 0 4px 14px -6px rgba(40, 25, 15, .12);
+  --font: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14110f; --surface: #1d1916; --surface-2: #26211d; --line: #332c26; --line-2: #463d35;
+    --fg: #f3ede6; --muted: #b3a89c; --faint: #8a8076;
+    --brand: #c4505a; --brand-2: #a83e48; --brand-soft: #3a1d20; --on-brand: #fff;
+    --accent: #f0b43a; --accent-soft: #3a2d12;
+    --ok: #6fd39a; --ok-bg: #173323; --warn: #f1c25b; --warn-bg: #3a2c0d; --bad: #ff8f84; --bad-bg: #3d1a17;
+    --info: #8ab8f0; --info-bg: #182a40; --neutral: #c9c1b8; --neutral-bg: #2b2621;
+    --whats: #2a9c5a; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px -8px rgba(0,0,0,.6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14110f; --surface: #1d1916; --surface-2: #26211d; --line: #332c26; --line-2: #463d35;
+  --fg: #f3ede6; --muted: #b3a89c; --faint: #8a8076;
+  --brand: #c4505a; --brand-2: #a83e48; --brand-soft: #3a1d20; --on-brand: #fff;
+  --accent: #f0b43a; --accent-soft: #3a2d12;
+  --ok: #6fd39a; --ok-bg: #173323; --warn: #f1c25b; --warn-bg: #3a2c0d; --bad: #ff8f84; --bad-bg: #3d1a17;
+  --info: #8ab8f0; --info-bg: #182a40; --neutral: #c9c1b8; --neutral-bg: #2b2621;
+  --whats: #2a9c5a; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px -8px rgba(0,0,0,.6);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 15px/1.45 var(--font); -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+[hidden] { display: none !important; }
+.mono { font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* barra do topo */
+.top { position: sticky; top: 0; z-index: 40; background: var(--brand); color: var(--on-brand); padding: calc(10px + env(safe-area-inset-top, 0px)) 16px 10px; }
+.top-in { max-width: 920px; margin: 0 auto; display: flex; align-items: center; gap: 10px; }
+.marca { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+.marca img { width: 34px; height: 34px; border-radius: 10px; flex: none; background: var(--brand-2); }
+.marca-t { min-width: 0; }
+.marca-t b { display: block; font-size: 1.02rem; font-weight: 800; line-height: 1.15; }
+.marca-t span { display: block; font-size: .78rem; opacity: .82; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.icone-btn { flex: none; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 10px; border: 0; background: rgba(255,255,255,.12); color: inherit; }
+.icone-btn svg { width: 20px; height: 20px; }
+.periodo-bar { max-width: 920px; margin: 10px auto 0; }
+.periodo-btn { width: 100%; display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 12px; border: 0; background: rgba(255,255,255,.14); color: inherit; font-weight: 700; text-align: left; }
+.periodo-btn svg { width: 18px; height: 18px; flex: none; opacity: .9; }
+.periodo-btn span { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.periodo-btn small { font-weight: 600; opacity: .8; }
+
+/* conteúdo */
+main { max-width: 920px; margin: 0 auto; padding: 14px 16px calc(96px + env(safe-area-inset-bottom, 0px)); }
+.view { display: grid; gap: 14px; }
+.sec-h { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 6px 2px -4px; }
+.sec-h h2 { margin: 0; font-size: 1.02rem; font-weight: 800; }
+.sec-h .link { border: 0; background: none; color: var(--brand); font-weight: 700; padding: 4px 0; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px; }
+.card h3 { margin: 0 0 10px; font-size: .95rem; font-weight: 800; }
+.vazio { text-align: center; color: var(--muted); padding: 26px 12px; }
+.vazio b { display: block; color: var(--fg); font-size: 1rem; margin-bottom: 4px; }
+
+/* indicadores */
+.kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (min-width: 640px) { .kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 13px; box-shadow: var(--shadow); min-width: 0; text-align: left; }
+button.kpi { cursor: pointer; }
+.kpi-k { display: flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .03em; }
+.kpi-k i { width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--line-2)); flex: none; }
+.kpi-v { font-size: 1.45rem; font-weight: 800; line-height: 1.15; margin-top: 4px; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi-s { font-size: .8rem; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kpi.destaque { background: var(--brand); color: var(--on-brand); border-color: var(--brand); }
+.kpi.destaque .kpi-k, .kpi.destaque .kpi-s { color: inherit; opacity: .85; }
+
+/* estoque */
+.estq-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.estq-num { font-size: 1.6rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.barra { height: 10px; border-radius: 99px; background: var(--surface-2); overflow: hidden; margin: 10px 0 8px; }
+.barra span { display: block; height: 100%; border-radius: inherit; background: var(--accent); width: 0; transition: width .4s ease; }
+.estq-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: .86rem; color: var(--muted); }
+
+/* gráfico de barras */
+.grafico { display: flex; align-items: flex-end; gap: 4px; height: 140px; padding-top: 6px; }
+.gb { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 4px; }
+.gb-bar { width: 100%; max-width: 34px; border-radius: 6px 6px 2px 2px; background: var(--brand); min-height: 2px; position: relative; }
+.gb-bar.zero { background: var(--line); }
+.gb-v { font-size: .7rem; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.gb-l { font-size: .68rem; color: var(--faint); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.graf-leg { font-size: .8rem; color: var(--muted); margin-top: 6px; }
+
+/* listas de distribuição */
+.dist { display: grid; gap: 9px; }
+.dist-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 10px; font-size: .9rem; }
+.dist-row b { font-variant-numeric: tabular-nums; }
+.dist-row .barra { grid-column: 1 / -1; height: 6px; margin: 0; }
+.dist-row .barra span { background: var(--c, var(--brand)); }
+.duas { display: grid; gap: 14px; }
+@media (min-width: 640px) { .duas { grid-template-columns: 1fr 1fr; } }
+
+/* pré-reservas */
+.pre { border-color: var(--accent); background: linear-gradient(0deg, var(--surface), var(--surface)) padding-box; }
+.pre-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+.pre-head h3 { margin: 0; display: flex; align-items: center; gap: 8px; }
+.badge { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 99px; background: var(--accent); color: #3a2400; font-size: .78rem; font-weight: 800; }
+.pre-item { border: 1px solid var(--line); border-radius: 12px; padding: 11px 12px; display: grid; gap: 4px; background: var(--surface); }
+.pre-item + .pre-item { margin-top: 8px; }
+.pre-item.nova { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); animation: piscaNova 1.4s ease-out 3; }
+@keyframes piscaNova { 50% { background: var(--accent-soft); } }
+@media (prefers-reduced-motion: reduce) { .pre-item.nova { animation: none; } }
+.pre-top { display: flex; justify-content: space-between; gap: 10px; font-weight: 800; }
+.pre-meta { font-size: .86rem; color: var(--muted); }
+.pre-btns { display: grid; grid-template-columns: 1.4fr 1fr; gap: 8px; margin-top: 6px; }
+
+/* botões */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 14px; border-radius: 12px; border: 1px solid transparent; font-weight: 700; text-decoration: none; text-align: center; line-height: 1.2; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn-pri { background: var(--brand); color: var(--on-brand); }
+.btn-pri:hover { background: var(--brand-2); }
+.btn-sec { background: var(--surface); border-color: var(--line-2); color: var(--fg); }
+.btn-sec:hover { background: var(--surface-2); }
+.btn-ok { background: var(--whats); color: #fff; }
+.btn-mp { background: #009ee3; color: #fff; }
+.btn-acc { background: var(--accent); color: #3a2400; }
+.btn-bad { background: var(--bad-bg); color: var(--bad); }
+.btn-bloco { width: 100%; }
+.btn[disabled], .btn[aria-disabled="true"] { opacity: .55; pointer-events: none; }
+.btns-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+/* chips e abas */
+.abas { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px 2px; }
+.abas::-webkit-scrollbar { display: none; }
+.aba { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 99px; border: 1px solid var(--line-2); background: var(--surface); font-weight: 700; font-size: .88rem; white-space: nowrap; }
+.aba small { font-weight: 800; font-size: .75rem; padding: 1px 7px; border-radius: 99px; background: var(--surface-2); color: var(--muted); }
+.aba[aria-pressed="true"], .aba[aria-selected="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.aba[aria-pressed="true"] small, .aba[aria-selected="true"] small { background: rgba(255,255,255,.2); color: inherit; }
+.ferramentas .aba { background: var(--surface-2); border-color: transparent; }
+.filtros-linha { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.campo { width: 100%; min-height: 44px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line-2); background: var(--surface); }
+.campo:focus-visible, .btn:focus-visible, .aba:focus-visible, .nav button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+select.campo { padding-right: 30px; }
+.rotulo { display: block; font-weight: 700; font-size: .86rem; margin: 0 0 5px; }
+.dica { font-size: .82rem; color: var(--muted); margin: 5px 0 0; }
+.grade-form { display: grid; gap: 12px; }
+.grade-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.err { color: var(--bad); font-size: .82rem; font-weight: 600; margin: 4px 0 0; }
+
+/* pílulas */
+.pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 99px; font-size: .74rem; font-weight: 800; white-space: nowrap; }
+.st-pendente { background: var(--warn-bg); color: var(--warn); }
+.st-saiu { background: var(--info-bg); color: var(--info); }
+.st-entregue { background: var(--ok-bg); color: var(--ok); }
+.st-cancelado { background: var(--neutral-bg); color: var(--neutral); }
+.pg-ok { background: var(--ok-bg); color: var(--ok); }
+.pg-aberto { background: var(--bad-bg); color: var(--bad); }
+
+/* lista de pedidos */
+.pedidos { display: grid; gap: 8px; }
+.ped { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; width: 100%; text-align: left; padding: 12px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); }
+.ped.cancelado { opacity: .62; }
+.ped-num { grid-row: span 3; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--surface-2); font-weight: 800; font-size: .95rem; font-variant-numeric: tabular-nums; }
+.ped-num small { display: block; font-size: .6rem; font-weight: 700; color: var(--muted); line-height: 1; margin-top: -2px; }
+.ped-nome { font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ped-val { font-weight: 800; font-variant-numeric: tabular-nums; text-align: right; }
+.ped-info { font-size: .84rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ped-pills { display: flex; gap: 5px; justify-content: flex-end; flex-wrap: wrap; }
+.ped-rod { grid-column: 2 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: .78rem; color: var(--faint); }
+.ped-acao { border: 1px solid var(--line-2); background: var(--surface); border-radius: 9px; padding: 5px 10px; font-weight: 800; font-size: .78rem; color: var(--fg); }
+.mais-itens { text-align: center; }
+
+/* clientes */
+.cli { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 2px 12px; align-items: center; width: 100%; text-align: left; padding: 12px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); }
+.avatar { grid-row: span 2; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--brand-soft); color: var(--brand); font-weight: 800; }
+.cli-nome { font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cli-info { font-size: .84rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cli-val { text-align: right; font-weight: 800; font-variant-numeric: tabular-nums; }
+.cli-val small { display: block; font-weight: 600; font-size: .75rem; color: var(--muted); }
+
+/* lista de opções (tela Mais) */
+.menu { display: grid; padding: 4px 0; }
+.menu-item { display: flex; align-items: center; gap: 12px; padding: 13px 14px; border: 0; border-top: 1px solid var(--line); background: none; text-align: left; width: 100%; }
+.menu-item:first-child { border-top: 0; }
+.menu-item svg { width: 20px; height: 20px; color: var(--brand); flex: none; }
+.menu-item span { flex: 1; font-weight: 700; }
+.menu-item small { color: var(--muted); font-weight: 600; }
+.menu.card { padding: 0; }
+.interruptor { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sw { position: relative; width: 50px; height: 30px; flex: none; border-radius: 99px; border: 0; background: var(--line-2); transition: background .2s; }
+.sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.3); transition: transform .2s; }
+.sw[aria-checked="true"] { background: var(--ok); }
+.sw[aria-checked="true"]::after { transform: translateX(20px); }
+.links-venda { display: grid; gap: 8px; }
+.link-linha { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 9px 10px; border-radius: 10px; background: var(--surface-2); font-size: .84rem; }
+.link-linha code { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: ui-monospace, monospace; }
+
+/* navegação de baixo */
+.nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--surface); border-top: 1px solid var(--line); padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px)); }
+.nav-in { max-width: 560px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.nav button { display: grid; justify-items: center; gap: 2px; padding: 6px 4px; border: 0; border-radius: 12px; background: none; color: var(--muted); font-size: .72rem; font-weight: 700; position: relative; }
+.nav button svg { width: 24px; height: 24px; }
+.nav button[aria-current="page"] { color: var(--brand); background: var(--brand-soft); }
+.nav .bolinha { position: absolute; top: 2px; right: calc(50% - 20px); min-width: 18px; height: 18px; padding: 0 5px; border-radius: 99px; background: var(--accent); color: #3a2400; font-size: .68rem; font-weight: 800; display: grid; place-items: center; }
+.fab { position: fixed; right: 16px; bottom: calc(80px + env(safe-area-inset-bottom, 0px)); z-index: 45; height: 54px; padding: 0 20px 0 16px; border-radius: 18px; border: 0; background: var(--brand); color: var(--on-brand); font-weight: 800; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 22px -6px rgba(122, 30, 36, .6); }
+.fab svg { width: 22px; height: 22px; }
+@media (min-width: 960px) { .fab { right: calc(50% - 460px + 16px); } }
+
+/* folhas (janelas de baixo) */
+.folha { position: fixed; inset: 0; z-index: 100; display: flex; align-items: flex-end; justify-content: center; }
+.folha-fundo { position: absolute; inset: 0; background: rgba(15, 10, 8, .55); }
+.folha-painel { position: relative; width: 100%; max-width: 620px; max-height: 92vh; overflow: auto; background: var(--bg); border-radius: 20px 20px 0 0; padding: 0 16px calc(18px + env(safe-area-inset-bottom, 0px)); box-shadow: 0 -10px 40px rgba(0,0,0,.25); }
+@media (min-width: 700px) { .folha { align-items: center; } .folha-painel { border-radius: 20px; max-height: 88vh; } }
+.folha-cab { position: sticky; top: 0; z-index: 2; background: var(--bg); display: flex; align-items: center; gap: 10px; padding: 14px 0 10px; }
+.folha-cab h2 { flex: 1; margin: 0; font-size: 1.08rem; font-weight: 800; }
+.fechar { width: 36px; height: 36px; border-radius: 10px; border: 0; background: var(--surface-2); font-size: 1.3rem; line-height: 1; }
+.folha-corpo { display: grid; gap: 14px; }
+
+/* detalhe do pedido */
+.det-top { display: flex; gap: 12px; align-items: center; }
+.det-num { width: 54px; height: 54px; border-radius: 14px; background: var(--brand); color: var(--on-brand); display: grid; place-items: center; font-weight: 800; font-size: 1.2rem; flex: none; }
+.det-top b { display: block; font-size: 1.1rem; }
+.det-top span { color: var(--muted); font-size: .86rem; }
+.dl { display: grid; gap: 8px; margin: 0; }
+.dl div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 10px; font-size: .92rem; }
+.dl dt { color: var(--muted); font-weight: 600; }
+.dl dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.seg { display: grid; grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); gap: 6px; }
+.seg button { min-height: 42px; padding: 6px 4px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); font-weight: 700; font-size: .82rem; }
+.seg button[aria-checked="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.acoes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.acoes .btn-bloco { grid-column: 1 / -1; }
+.confirmar { padding: 12px; border-radius: 12px; background: var(--bad-bg); color: var(--bad); display: grid; gap: 10px; font-weight: 600; }
+
+/* novo pedido */
+.qtd { display: inline-grid; grid-template-columns: 44px 54px 44px; border: 1px solid var(--line-2); border-radius: 12px; overflow: hidden; background: var(--surface); }
+.qtd button { border: 0; background: var(--surface-2); font-size: 1.3rem; font-weight: 700; }
+.qtd output { display: grid; place-items: center; font-weight: 800; font-size: 1.1rem; }
+.prev { display: grid; gap: 8px; }
+.prev-item { padding: 10px 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); font-size: .88rem; }
+.prev-item b { display: block; }
+textarea.campo { min-height: 150px; resize: vertical; }
+.texto-saida { min-height: 260px; font-size: .86rem; font-family: ui-monospace, monospace; }
+
+/* acessos */
+.vis-row { padding: 10px 12px; border-radius: 12px; background: var(--surface-2); display: grid; gap: 4px; }
+.vis-row + .vis-row { margin-top: 8px; }
+.vis-funil { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: .86rem; color: var(--muted); }
+.vis-funil b { color: var(--fg); }
+.vis-rec { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: .85rem; }
+.vis-rec li { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
+
+/* mensagens */
+.av-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; align-items: center; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); }
+.av-item + .av-item { margin-top: 8px; }
+.av-item.feito { opacity: .6; }
+.av-item .btn { grid-row: span 2; min-height: 40px; }
+.av-nome { font-weight: 800; }
+.av-meta { font-size: .82rem; color: var(--muted); }
+
+/* entrada */
+.entrada { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: 24px 16px; background: var(--brand); }
+.entrada-card { width: 100%; max-width: 380px; display: grid; gap: 14px; padding: 24px 20px; border-radius: 20px; background: var(--surface); box-shadow: 0 20px 50px rgba(0,0,0,.3); }
+.entrada-card img { width: 64px; height: 64px; border-radius: 16px; }
+.entrada-card h1 { margin: 0; font-size: 1.4rem; font-weight: 800; }
+.carregando { text-align: center; color: var(--muted); padding: 30px 0; }
+
+/* aviso e app */
+.toast { position: fixed; left: 50%; bottom: calc(150px + env(safe-area-inset-bottom, 0px)); z-index: 300; transform: translate(-50%, 0); width: calc(100% - 32px); max-width: 460px; display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: #1d1915; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,.35); transition: opacity .2s, transform .2s; font-weight: 600; }
+.toast:not(.on) { opacity: 0; pointer-events: none; transform: translate(-50%, 10px); }
+.toast span { flex: 1; }
+.toast button { border: 0; background: none; color: var(--accent); font-weight: 800; }
+.app-instalar { position: fixed; left: 12px; bottom: calc(80px + env(safe-area-inset-bottom, 0px)); z-index: 44; border: 0; border-radius: 999px; padding: 10px 14px; font-weight: 800; font-size: .86rem; background: var(--accent); color: #3a2400; box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+.app-ios { position: fixed; left: 12px; right: 12px; bottom: calc(140px + env(safe-area-inset-bottom, 0px)); z-index: 160; max-width: 420px; margin: 0 auto; padding: 14px 16px; border-radius: 16px; background: var(--surface); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+.app-ios p { margin: 0 0 6px; }
+.app-ios button { margin-top: 6px; border: 0; border-radius: 10px; padding: 10px 14px; background: var(--brand); color: #fff; font-weight: 700; width: 100%; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="marca">
+      <img src="/icones/painel-192.png" alt="" width="34" height="34">
+      <div class="marca-t"><b>Painel do Manel</b><span id="topVenda">Carregando…</span></div>
+    </div>
+    <button type="button" class="icone-btn" id="bAtualizar" aria-label="Atualizar agora"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button>
+    <button type="button" class="icone-btn" id="bSom" aria-pressed="true" aria-label="Som dos avisos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></button>
+  </div>
+  <div class="periodo-bar">
+    <button type="button" class="periodo-btn" id="bPeriodo" aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      <span id="periodoTxt">Venda atual</span><small>Trocar</small>
+    </button>
+  </div>
+</header>
+
+<main id="app">
+  <p class="carregando" id="carregando">Carregando pedidos…</p>
+  <section class="view" id="vInicio" hidden aria-label="Início"></section>
+  <section class="view" id="vPedidos" hidden aria-label="Pedidos"></section>
+  <section class="view" id="vClientes" hidden aria-label="Clientes"></section>
+  <section class="view" id="vMais" hidden aria-label="Mais"></section>
+</main>
+
+<button type="button" class="fab" id="fab" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Novo pedido</button>
+
+<nav class="nav" aria-label="Telas do painel">
+  <div class="nav-in">
+    <button type="button" data-view="inicio" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Início<span class="bolinha" id="navPre" hidden></span></button>
+    <button type="button" data-view="pedidos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>Pedidos<span class="bolinha" id="navPend" hidden></span></button>
+    <button type="button" data-view="clientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6"/><path d="M16 4a4 4 0 0 1 0 8M22 21c0-3-2-5-4-5.6"/></svg>Clientes</button>
+    <button type="button" data-view="mais"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>Mais</button>
+  </div>
+</nav>
+
+<div class="folha" id="folha" hidden>
+  <div class="folha-fundo" data-fechar></div>
+  <section class="folha-painel" role="dialog" aria-modal="true" aria-labelledby="folhaT" tabindex="-1">
+    <header class="folha-cab"><h2 id="folhaT"></h2><button type="button" class="fechar" data-fechar aria-label="Fechar">×</button></header>
+    <div class="folha-corpo" id="folhaC"></div>
+  </section>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toastT"></span><button type="button" id="toastB" hidden></button></div>
+<script>
+(function () {
+"use strict";
+const CFG = {
+  marca: "Vatapá do Manel",
+  whats: "5593991463982",
+  ddd: "93",
+  site: "https://vatapadomanel.pages.dev",
+  links: { 1: "Vatapá do Manel 1", 2: "Vatapá do Manel 2" },
+  vendaInicial: "2026-11-01",
+  banco: { url: "https://guitoqplaibauyxxnump.supabase.co", chave: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd1aXRvcXBsYWliYXV5eHhudW1wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzMTgyNjEsImV4cCI6MjEwODg5NDI2MX0.CU6JK6thqsKEsb_FJUPzhyqDxcfawIAj-1Dg7RDo_p4" },
+};
+/* LEITOR-INICIO */
+const INVISIVEIS = /[​-‏‪-‮⁠-⁩﻿]/g;
+const ROTULOS = {
+  "pedido": "codigo", "codigo": "codigo", "n do pedido": "codigo", "numero do pedido": "codigo",
+  "nome": "nome", "cliente": "nome",
+  "whatsapp": "whatsapp", "whats": "whatsapp", "zap": "whatsapp", "telefone": "whatsapp",
+  "fone": "whatsapp", "celular": "whatsapp", "contato": "whatsapp",
+  "endereco": "endereco", "endereco de entrega": "endereco", "entregar em": "endereco",
+  "quantidade": "qtd", "qtd": "qtd", "qtde": "qtd", "marmitas": "qtd",
+  "link": "link", "canal": "link", "vendedor": "link", "vendedora": "link",
+  "pagamento": "pagamento", "forma de pagamento": "pagamento", "pgto": "pagamento",
+};
+const PREFIXO = /^\s*(?:\[[^\]\n]{3,40}\]\s*[^:\n]{1,60}?:\s+|\d{1,2}\/\d{1,2}(?:\/\d{2,4})?,?\s+\d{1,2}:\d{2}(?::\d{2})?(?:\s*[ap]\.?\s*m\.?)?\s+-\s+[^:\n]{1,60}?:\s+)/i;
+const brlFmt = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+
+function brl(n) { return brlFmt.format(Number(n) || 0); }
+
+function plural(n, um, varios) { return n + " " + (n === 1 ? um : varios); }
+
+function limpa(s, max) {
+  return String(s == null ? "" : s)
+    .replace(INVISIVEIS, "")
+    .replace(/\s*[,;]?\s*[\r\n]+\s*/g, ", ")
+    .replace(/\s+/g, " ")
+    .replace(/^[\s,;.\-–]+/, "")
+    .replace(/[\s,;]+$/, "")
+    .slice(0, max || 200)
+    .trim();
+}
+
+function normFone(s, ddd) {
+  let d = String(s == null ? "" : s).replace(/\D/g, "").replace(/^0+/, "");
+  if (d.length >= 12 && d.startsWith("55")) d = d.slice(2);
+  if ((d.length === 8 || d.length === 9) && ddd) d = ddd + d;
+  return d.length === 10 || d.length === 11 ? d : "";
+}
+
+function fmtFone(d) {
+  d = String(d == null ? "" : d).replace(/\D/g, "");
+  if (d.length === 11) return "(" + d.slice(0, 2) + ") " + d.slice(2, 7) + "-" + d.slice(7);
+  if (d.length === 10) return "(" + d.slice(0, 2) + ") " + d.slice(2, 6) + "-" + d.slice(6);
+  return d;
+}
+
+function montarMensagem(p, cfg) {
+  return [
+    "*NOVO PEDIDO · " + cfg.marca.toUpperCase() + "*",
+    "Pedido: #" + p.codigo,
+    "",
+    "Nome: " + p.nome,
+    "WhatsApp: " + fmtFone(p.whatsapp),
+    "Endereço: " + p.endereco,
+    "Quantidade: " + plural(p.qtd, "marmita", "marmitas") + " de " + cfg.produto,
+    "Total: " + brl(p.qtd * cfg.preco) + " (entrega grátis)",
+    p.pagamento ? "Pagamento: " + p.pagamento : null,
+    "Entrega: " + cfg.entrega,
+    p.link ? "Link: " + ((cfg.links && cfg.links[p.link]) || "Vatapá do Manel " + p.link) : null,
+  ].filter((x) => x !== null).join("\n");
+}
+
+function lerPedidos(texto, ddd) {
+  const linhas = String(texto == null ? "" : texto)
+    .replace(INVISIVEIS, "")
+    .replace(/\r\n?/g, "\n")
+    .split("\n");
+  const blocos = [];
+  let b = null;
+  const abrir = () => { b = { codigo: "", nome: "", whatsapp: "", endereco: "", qtd: "", link: "", pagamento: "" }; blocos.push(b); };
+  for (const bruta of linhas) {
+    const l = bruta.replace(PREFIXO, "").replace(/[*_~`]/g, "").trim();
+    if (!l) continue;
+    if (/\bnovo\s+pedido\b/i.test(l)) { abrir(); continue; }
+    const m = l.match(/^([^:]{2,30}?)\s*:\s*(.+)$/);
+    if (!m) continue;
+    const rot = m[1].toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z ]/g, " ").replace(/\s+/g, " ").trim();
+    const campo = ROTULOS[rot];
+    if (!campo) continue;
+    if (!b || b[campo]) abrir();
+    b[campo] = m[2].trim();
+  }
+  const vistos = new Set();
+  return blocos.map((x) => {
+    const q = parseInt((String(x.qtd).match(/\d+/) || ["1"])[0], 10);
+    const l = String(x.link).match(/\d/);
+    return {
+      codigo: (x.codigo.toUpperCase().match(/[A-Z0-9]{4,8}/) || [""])[0],
+      nome: limpa(x.nome, 60),
+      whatsapp: normFone(x.whatsapp, ddd),
+      endereco: limpa(x.endereco, 220),
+      qtd: Math.min(99, Math.max(1, q || 1)),
+      link: l ? Number(l[0]) : 0,
+      pagamento: limpa(x.pagamento, 80),
+    };
+  }).filter((x) => {
+    if (!x.nome && !x.endereco) return false;
+    if (x.codigo) {
+      if (vistos.has(x.codigo)) return false;
+      vistos.add(x.codigo);
+    }
+    return true;
+  });
+}
+/* LEITOR-FIM */
+/* ---------- utilidades ---------- */
+const $ = (id) => document.getElementById(id);
+const n2 = (n) => String(n || 0).padStart(2, "0");
+const ALFA = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+const DIAS = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
+const MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+const MES3 = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+function gerarCodigo() {
+  const a = new Uint8Array(5);
+  if (window.crypto && crypto.getRandomValues) crypto.getRandomValues(a);
+  else for (let i = 0; i < a.length; i++) a[i] = Math.floor(Math.random() * 256);
+  let s = "";
+  for (const x of a) s += ALFA[x % ALFA.length];
+  return s;
+}
+function linkWhats(numero, texto) { return "https://wa.me/" + (numero || "") + (texto ? "?text=" + encodeURIComponent(texto) : ""); }
+function linkMapa(end) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(String(end || "").replace(/·\s*bairro:/i, ",")); }
+function norm(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim(); }
+const ymd = (ms) => { const d = new Date(ms); return d.getFullYear() + "-" + n2(d.getMonth() + 1) + "-" + n2(d.getDate()); };
+const dataCurta = (ms) => { if (!ms) return ""; const d = new Date(ms); return n2(d.getDate()) + "/" + n2(d.getMonth() + 1) + " " + n2(d.getHours()) + ":" + n2(d.getMinutes()); };
+function isoParaData(iso) { const [y, m, d] = String(iso).split("-").map(Number); return new Date(y, (m || 1) - 1, d || 1); }
+function vendaTxt(iso) { const d = isoParaData(iso); return DIAS[d.getDay()] + ", " + n2(d.getDate()) + "/" + n2(d.getMonth() + 1); }
+function vendaTitulo(iso) { const t = vendaTxt(iso); return t.charAt(0).toUpperCase() + t.slice(1); }
+const guarda = {
+  ler(k) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } },
+  gravar(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* sem armazenamento */ } },
+};
+function h(tag, props, ...kids) {
+  const el = document.createElement(tag);
+  if (props) {
+    for (const [k, v] of Object.entries(props)) {
+      if (v == null || v === false) continue;
+      if (k === "class") el.className = v;
+      else if (k === "text") el.textContent = v;
+      else if (k === "dataset") Object.assign(el.dataset, v);
+      else if (k === "style") el.setAttribute("style", v);
+      else if (k.startsWith("on") && typeof v === "function") el.addEventListener(k.slice(2), v);
+      else el.setAttribute(k, v === true ? "" : String(v));
+    }
+  }
+  for (const kid of kids.flat()) {
+    if (kid == null || kid === false) continue;
+    el.append(kid.nodeType ? kid : String(kid));
+  }
+  return el;
+}
+let toastTimer = 0;
+function toast(msg, acao) {
+  const b = $("toastB");
+  $("toastT").textContent = msg;
+  if (acao) { b.hidden = false; b.textContent = acao.rotulo; b.onclick = () => { $("toast").classList.remove("on"); acao.fazer(); }; }
+  else { b.hidden = true; b.onclick = null; }
+  $("toast").classList.add("on");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => $("toast").classList.remove("on"), acao ? 6500 : 3200);
+}
+function copiar(texto, aoFalhar) {
+  const falhou = () => { if (aoFalhar) aoFalhar(); else toast("Não deu para copiar. Selecione e copie pelo celular."); };
+  try { navigator.clipboard.writeText(texto).then(() => toast("Copiado."), falhou); } catch (e) { falhou(); }
+}
+function msgErro() { return navigator.onLine === false ? "Sem internet. Tente de novo quando voltar." : "Não deu para salvar agora. Tente de novo."; }
+const ICO = {
+  whats: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3.5c-4.7 0-8.5 3.4-8.5 7.6 0 2.3 1.1 4.3 2.9 5.7l-.9 3.7 3.9-2.1c.8.2 1.7.3 2.6.3 4.7 0 8.5-3.4 8.5-7.6S16.7 3.5 12 3.5Z"/></svg>',
+  seta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>',
+};
+function icone(nome) { const s = h("span", { "aria-hidden": "true", style: "display:contents" }); s.innerHTML = ICO[nome]; return s; }
+
+/* ---------- banco (Supabase, com o código do dono) ---------- */
+function criarBanco(token) {
+  const base = CFG.banco.url + "/rest/v1/rpc/";
+  const cab = { apikey: CFG.banco.chave, Authorization: "Bearer " + CFG.banco.chave, "Content-Type": "application/json" };
+  async function rpc(nome, corpo) {
+    let r;
+    try { r = await fetch(base + nome, { method: "POST", headers: cab, body: JSON.stringify({ p_token: token, ...corpo }) }); }
+    catch (e) { const er = new Error("rede"); er.code = "network"; throw er; }
+    if (!r.ok) { const er = new Error("http " + r.status); er.code = r.status === 400 ? "denied" : "network"; throw er; }
+    const t = await r.text();
+    return t ? JSON.parse(t) : null;
+  }
+  return {
+    rpc,
+    listar: (col) => rpc("kv_listar", { p_colecao: col }),
+    ler: (col, id) => rpc("kv_ler", { p_colecao: col, p_id: id }),
+    gravar: (col, id, dados, mesclar) => rpc("kv_gravar", { p_colecao: col, p_id: id, p_dados: dados, p_mesclar: !!mesclar }),
+    apagar: (col, id) => rpc("kv_apagar", { p_colecao: col, p_id: id }),
+  };
+}
+async function rpcPublico(nome, corpo) {
+  const r = await fetch(CFG.banco.url + "/rest/v1/rpc/" + nome, {
+    method: "POST",
+    headers: { apikey: CFG.banco.chave, Authorization: "Bearer " + CFG.banco.chave, "Content-Type": "application/json" },
+    body: JSON.stringify(corpo || {}),
+  });
+  if (!r.ok) throw new Error("http " + r.status);
+  const t = await r.text();
+  return t ? JSON.parse(t) : null;
+}
+
+/* ---------- estado ---------- */
+const VENDA_PADRAO = { data: CFG.vendaInicial, horario: "11h30", preco: 20, total: 50, ajuste: 0, aberta: true, produto: "Vatapá de Frango" };
+const estado = {
+  db: null, token: null,
+  pedidos: new Map(), carregado: false, assinatura: "",
+  venda: { ...VENDA_PADRAO },
+  view: guarda.ler("vdm2-view") || "inicio",
+  periodo: guarda.ler("vdm2-periodo") || { tipo: "venda", valor: null },
+  st: "todos", pag: "todos", link: "todos", busca: "", limite: 60,
+  cliOrdem: "gasto", cliBusca: "",
+  folha: null,
+  ocupado: new Set(),
+};
+const STATUS = [
+  { v: "pendente", r: "Reservado" }, { v: "saiu", r: "Saiu" }, { v: "entregue", r: "Entregue" }, { v: "cancelado", r: "Cancelado" },
+];
+const STATUS_TXT = { pendente: "Reservado", saiu: "Saiu p/ entrega", entregue: "Entregue", cancelado: "Cancelado" };
+const PAGTO = [
+  { v: "aberto", r: "A receber" }, { v: "pix", r: "Pix" }, { v: "dinheiro", r: "Dinheiro" }, { v: "cartao", r: "Cartão" },
+];
+const PAGTO_TXT = { aberto: "A receber", pix: "Pago no Pix", dinheiro: "Pago em dinheiro", cartao: "Pago no cartão" };
+const pago = (p) => !!p.pagamento && p.pagamento !== "aberto";
+const ativo = (p) => p.status !== "cancelado";
+const vendaDe = (p) => p.venda || CFG.vendaInicial;
+const quandoDe = (p) => Number(p.criadoEm) || 0;   /* quando o cliente reservou */
+const vendaMs = (p) => isoParaData(vendaDe(p)).getTime() + 12 * 3600e3;   /* dia da venda = dia da entrega */
+const soma = (arr, f) => arr.reduce((t, p) => t + (Number(f(p)) || 0), 0);
+const entregaTxtDe = (p) => vendaTxt(vendaDe(p));
+
+/* período */
+function periodoAtual() {
+  const p = estado.periodo || { tipo: "venda" };
+  if (p.tipo === "venda" && !p.valor) return { tipo: "venda", valor: estado.venda.data };
+  return p;
+}
+function rotuloPeriodo() {
+  const p = periodoAtual();
+  const hoje = ymd(Date.now());
+  if (p.tipo === "venda") return "Venda de " + vendaTxt(p.valor) + (p.valor === estado.venda.data ? " (atual)" : "");
+  if (p.tipo === "dia") return p.valor === hoje ? "Hoje, " + vendaTxt(p.valor).split(", ")[1] : "Dia " + vendaTxt(p.valor);
+  if (p.tipo === "7d") return "Últimos 7 dias";
+  if (p.tipo === "mes") { const [y, m] = p.valor.split("-").map(Number); return MESES[m - 1].replace(/^./, (c) => c.toUpperCase()) + " de " + y; }
+  if (p.tipo === "ano") return "Ano de " + p.valor;
+  return "Todo o período";
+}
+function noPeriodo(ped) {
+  const p = periodoAtual();
+  const t = vendaMs(ped);
+  if (p.tipo === "venda") return vendaDe(ped) === p.valor;
+  if (p.tipo === "dia") return ymd(t) === p.valor;
+  if (p.tipo === "7d") { const hoje = ymd(Date.now()); const ini = ymd(Date.now() - 6 * 864e5); const d = ymd(t); return d >= ini && d <= hoje; }
+  if (p.tipo === "mes") return ymd(t).slice(0, 7) === p.valor;
+  if (p.tipo === "ano") return ymd(t).slice(0, 4) === String(p.valor);
+  return true;
+}
+function todos() { return [...estado.pedidos.values()]; }
+function doPeriodo() { return todos().filter(noPeriodo); }
+function vendasExistentes() {
+  const s = new Set(todos().map(vendaDe));
+  s.add(estado.venda.data);
+  return [...s].sort().reverse();
+}
+function bairroDe(p) {
+  const e = String(p.endereco || "");
+  const m = e.match(/bairro:\s*([^\n·]+?)\s*$/i);
+  let b = m ? m[1] : "";
+  if (!b) { const partes = e.split(",").map((x) => x.trim()).filter(Boolean); if (partes.length >= 3) b = partes[2]; }
+  b = b.replace(/\s+/g, " ").trim();
+  return b ? b.toLowerCase().replace(/(^|\s)\S/g, (c) => c.toUpperCase()) : "Sem bairro";
+}
+function ruaDe(p) { return String(p.endereco || "").replace(/\s*·?\s*bairro:.*$/i, "").trim(); }
+function nomeLink(n) { return CFG.links[n] || "Sem link"; }
+function numeroProx(venda) {
+  let max = 0;
+  for (const p of estado.pedidos.values()) if (vendaDe(p) === venda) max = Math.max(max, Number(p.numero) || 0);
+  return max + 1;
+}
+
+/* ---------- dados: carregar e salvar ---------- */
+async function carregarPedidos() {
+  try {
+    const linhas = (await estado.db.listar("pedidos")) || [];
+    const ass = JSON.stringify(linhas);
+    if (ass === estado.assinatura && estado.carregado) return;
+    estado.assinatura = ass;
+    estado.pedidos = new Map(linhas.map((l) => [l.id, { id: l.id, ...l.dados }]));
+    estado.carregado = true;
+    $("carregando").hidden = true;
+    aplicarMp();
+    renderTudo();
+  } catch (e) {
+    if (!estado.carregado) $("carregando").textContent = "Não consegui carregar os pedidos. Confira a internet e toque em atualizar.";
+  }
+}
+async function carregarVenda() {
+  try {
+    let v = await estado.db.ler("config", "venda");
+    if (!v) {
+      const e = await estado.db.ler("config", "estoque");
+      v = { ...VENDA_PADRAO, total: (e && Number(e.siteTotal || e.total)) || VENDA_PADRAO.total };
+    }
+    estado.venda = { ...VENDA_PADRAO, ...v };
+  } catch (e) { /* fica o padrão */ }
+  $("topVenda").textContent = "Entrega " + vendaTxt(estado.venda.data) + " · " + (estado.venda.aberta ? "vendas abertas" : "vendas encerradas");
+}
+async function mudar(id, campos) {
+  const antes = estado.pedidos.get(id);
+  if (!antes || estado.ocupado.has(id)) return false;
+  const extra = { atualizadoEm: Date.now() };
+  if (campos.status === "entregue" && antes.status !== "entregue") extra.entregueEm = Date.now();
+  if (campos.status === "saiu" && antes.status !== "saiu") extra.saiuEm = Date.now();
+  estado.ocupado.add(id);
+  estado.pedidos.set(id, { ...antes, ...campos, ...extra });
+  renderTudo();
+  try { await estado.db.gravar("pedidos", id, { ...campos, ...extra }, true); return true; }
+  catch (e) { estado.pedidos.set(id, antes); renderTudo(); toast(msgErro()); return false; }
+  finally { estado.ocupado.delete(id); }
+}
+async function registrar(entrada) {
+  const feitos = [], repetidos = [];
+  const venda = estado.venda.data;
+  let prox = numeroProx(venda);
+  for (const p of entrada) {
+    let codigo = p.codigo;
+    if (codigo) {
+      if (estado.pedidos.has(codigo)) { repetidos.push(estado.pedidos.get(codigo)); continue; }
+      const ja = await estado.db.ler("pedidos", codigo);
+      if (ja) { repetidos.push({ id: codigo, ...ja }); continue; }
+    } else {
+      do { codigo = gerarCodigo(); } while (estado.pedidos.has(codigo));
+    }
+    const agora = Date.now();
+    const preco = Number(estado.venda.preco) || 20;
+    const doc = {
+      codigo, numero: prox++, venda,
+      nome: p.nome, whatsapp: p.whatsapp || "", endereco: p.endereco,
+      qtd: p.qtd, preco, total: p.qtd * preco,
+      status: "pendente", pagamento: p.pagamentoJa || "aberto",
+      link: Number(p.link) || 0, origem: p.codigo ? "link" : "manual",
+      formaPag: p.pagamento || "", criadoEm: agora, atualizadoEm: agora,
+    };
+    await estado.db.gravar("pedidos", codigo, doc, false);
+    estado.pedidos.set(codigo, { id: codigo, ...doc });
+    feitos.push({ id: codigo, ...doc });
+  }
+  renderTudo();
+  return { feitos, repetidos };
+}
+
+/* ---------- textos para WhatsApp ---------- */
+function textoNota(p) {
+  return [
+    "*NOTA DE ENTREGA Nº " + n2(p.numero) + "*",
+    CFG.marca + " · " + entregaTxtDe(p),
+    "Pedido #" + p.codigo,
+    "",
+    "Cliente: " + p.nome,
+    p.whatsapp ? "WhatsApp: " + fmtFone(p.whatsapp) : null,
+    "Endereço: " + p.endereco,
+    "Mapa: " + linkMapa(p.endereco),
+    "",
+    p.qtd + " x " + estado.venda.produto + ": " + brl(p.total),
+    "Entrega: grátis",
+    "*Total: " + brl(p.total) + "*",
+    "Pagamento: " + (pago(p) ? PAGTO_TXT[p.pagamento].toLowerCase() : "a receber (" + brl(p.total) + ")" + (p.formaPag ? " · " + p.formaPag : "")),
+  ].filter((x) => x !== null).join("\n");
+}
+function textoLista(arr, titulo) {
+  const marm = soma(arr, (p) => p.qtd);
+  const linhas = ["*" + (titulo || "ENTREGAS") + " · " + CFG.marca.toUpperCase() + "*", rotuloPeriodo() + " · " + plural(arr.length, "pedido", "pedidos") + " · " + plural(marm, "marmita", "marmitas")];
+  for (const p of arr) {
+    linhas.push("", "*Nº " + n2(p.numero) + " · " + p.nome + "*",
+      plural(p.qtd, "marmita", "marmitas") + " · " + brl(p.total) + " · " + (pago(p) ? "pago" : "RECEBER " + brl(p.total) + (p.formaPag ? " (" + p.formaPag + ")" : "")),
+      p.endereco);
+    if (p.whatsapp) linhas.push(fmtFone(p.whatsapp));
+  }
+  return linhas.join("\n");
+}
+function textoPorBairro(arr) {
+  const grupos = new Map();
+  for (const p of arr) { const b = bairroDe(p); if (!grupos.has(b)) grupos.set(b, []); grupos.get(b).push(p); }
+  const ordem = [...grupos.entries()].sort((a, b) => (a[0] === "Sem bairro") - (b[0] === "Sem bairro") || b[1].length - a[1].length || a[0].localeCompare(b[0], "pt-BR"));
+  const linhas = ["*ENTREGAS POR BAIRRO · " + CFG.marca.toUpperCase() + "*", rotuloPeriodo() + " · " + plural(arr.length, "pedido", "pedidos") + " · " + plural(soma(arr, (p) => p.qtd), "marmita", "marmitas")];
+  for (const [b, ps] of ordem) {
+    linhas.push("", "📍 *" + b.toUpperCase() + "* (" + plural(soma(ps, (p) => p.qtd), "marmita", "marmitas") + ")");
+    for (const p of ps) {
+      linhas.push("• Nº " + n2(p.numero) + " · " + p.nome + " · " + p.qtd + "x · " + (pago(p) ? "pago" : "RECEBER " + brl(p.total) + (p.formaPag ? " (" + p.formaPag + ")" : "")));
+      linhas.push("   " + ruaDe(p) + (p.whatsapp ? " · " + fmtFone(p.whatsapp) : ""));
+    }
+  }
+  return linhas.join("\n");
+}
+function numeros(arr) {
+  const at = arr.filter(ativo);
+  const pagos = at.filter(pago);
+  return {
+    recebidos: arr.length, pedidos: at.length, marmitas: soma(at, (p) => p.qtd),
+    faturamento: soma(at, (p) => p.total), recebido: soma(pagos, (p) => p.total),
+    aReceber: soma(at.filter((p) => !pago(p)), (p) => p.total), aReceberN: at.filter((p) => !pago(p)).length,
+    entregues: at.filter((p) => p.status === "entregue").length,
+    naRua: at.filter((p) => p.status === "saiu").length,
+    pendentes: at.filter((p) => p.status === "pendente").length,
+    cancelados: arr.length - at.length,
+    pix: soma(pagos.filter((p) => p.pagamento === "pix"), (p) => p.total),
+    dinheiro: soma(pagos.filter((p) => p.pagamento === "dinheiro"), (p) => p.total),
+    cartao: soma(pagos.filter((p) => p.pagamento === "cartao"), (p) => p.total),
+  };
+}
+function textoResumo() {
+  const arr = doPeriodo();
+  const n = numeros(arr);
+  const bairros = new Map();
+  for (const p of arr.filter(ativo)) bairros.set(bairroDe(p), (bairros.get(bairroDe(p)) || 0) + (Number(p.qtd) || 0));
+  const l = [
+    "*RESUMO · " + CFG.marca.toUpperCase() + "*", rotuloPeriodo(), "",
+    "Pedidos: " + n.pedidos + " · Marmitas: " + n.marmitas, "Vendido: " + brl(n.faturamento), "",
+    "*Já recebido: " + brl(n.recebido) + "*", "Pix: " + brl(n.pix), "Dinheiro: " + brl(n.dinheiro), "Cartão: " + brl(n.cartao), "",
+    "*A receber:* " + brl(n.aReceber) + " em " + plural(n.aReceberN, "pedido", "pedidos"), "",
+    "*Entregas:* " + n.entregues + " entregues · " + n.naRua + " na rua · " + n.pendentes + " reservados" + (n.cancelados ? " · " + n.cancelados + " cancelados" : ""),
+  ];
+  if (bairros.size) { l.push("", "*Marmitas por bairro*"); for (const [b, q] of [...bairros.entries()].sort((a, c) => c[1] - a[1])) l.push("• " + b + ": " + q); }
+  return l.join("\n");
+}
+
+/* ---------- telas ---------- */
+function renderTudo() {
+  $("periodoTxt").textContent = rotuloPeriodo();
+  const pendTot = todos().filter((p) => p.status === "pendente" || p.status === "saiu").filter((p) => vendaDe(p) === estado.venda.data).length;
+  $("navPend").textContent = pendTot; $("navPend").hidden = !pendTot;
+  if (!estado.carregado) return;
+  if (estado.view === "inicio") renderInicio();
+  if (estado.view === "pedidos") renderPedidos();
+  if (estado.view === "clientes") renderClientes();
+  if (estado.view === "mais") renderMais();
+  if (estado.folha && estado.folha.tipo === "pedido") renderFolhaPedido();
+}
+function mostrarView(v) {
+  estado.view = v;
+  guarda.gravar("vdm2-view", v);
+  for (const [k, id] of [["inicio", "vInicio"], ["pedidos", "vPedidos"], ["clientes", "vClientes"], ["mais", "vMais"]]) $(id).hidden = k !== v || !estado.carregado;
+  document.querySelectorAll(".nav button").forEach((b) => { if (b.dataset.view === v) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); });
+  $("fab").hidden = !(v === "inicio" || v === "pedidos");
+  window.scrollTo(0, 0);
+  renderTudo();
+}
+function kpi(rotulo, valor, sub, cor, aoClicar, destaque) {
+  const tag = aoClicar ? "button" : "div";
+  const el = h(tag, { class: "kpi" + (destaque ? " destaque" : ""), type: aoClicar ? "button" : null, onclick: aoClicar || null },
+    h("div", { class: "kpi-k" }, h("i", { style: cor ? "--c:" + cor : null }), rotulo),
+    h("div", { class: "kpi-v", text: valor }),
+    sub ? h("div", { class: "kpi-s", text: sub }) : null);
+  return el;
+}
+function irParaPedidos(st, pag) {
+  estado.st = st || "todos"; estado.pag = pag || "todos"; estado.limite = 60;
+  mostrarView("pedidos");
+}
+function distLinhas(itens, cor) {
+  const max = Math.max(1, ...itens.map((i) => i.v));
+  return h("div", { class: "dist" }, ...itens.map((i) => h("div", { class: "dist-row", style: "--c:" + (i.cor || cor || "var(--brand)") },
+    h("span", { text: i.r }), h("b", { text: i.txt || String(i.v) }),
+    h("div", { class: "barra" }, h("span", { style: "width:" + Math.round((i.v / max) * 100) + "%" })))));
+}
+function grafico(arr) {
+  const p = periodoAtual();
+  const porMes = p.tipo === "ano" || p.tipo === "tudo";
+  const mapa = new Map();
+  const at = arr.filter(ativo);
+  for (const x of at) { const k = porMes ? ymd(vendaMs(x)).slice(0, 7) : ymd(vendaMs(x)); mapa.set(k, (mapa.get(k) || 0) + (Number(x.qtd) || 0)); }
+  let chaves = [];
+  if (p.tipo === "mes") { const [y, m] = p.valor.split("-").map(Number); const dias = new Date(y, m, 0).getDate(); for (let d = 1; d <= dias; d++) chaves.push(y + "-" + n2(m) + "-" + n2(d)); }
+  else if (p.tipo === "7d") { for (let i = 6; i >= 0; i--) chaves.push(ymd(Date.now() - i * 864e5)); }
+  else if (p.tipo === "ano") { for (let m = 1; m <= 12; m++) chaves.push(p.valor + "-" + n2(m)); }
+  else { chaves = [...mapa.keys()].sort(); if (chaves.length > 14) chaves = chaves.slice(-14); }
+  if (!chaves.length) return h("p", { class: "muted", text: "Sem pedidos no período." });
+  const max = Math.max(1, ...chaves.map((k) => mapa.get(k) || 0));
+  const mostrarValor = chaves.length <= 14;
+  return h("div", null,
+    h("div", { class: "grafico", role: "img", "aria-label": "Marmitas por " + (porMes ? "mês" : "dia") },
+      ...chaves.map((k, i) => {
+        const v = mapa.get(k) || 0;
+        const rot = porMes ? MES3[Number(k.slice(5, 7)) - 1] : k.slice(8, 10) + (chaves.length <= 10 ? "/" + k.slice(5, 7) : "");
+        const mostrarRot = chaves.length <= 14 || i % 3 === 0;
+        return h("div", { class: "gb", title: k + ": " + v },
+          mostrarValor && v ? h("span", { class: "gb-v", text: String(v) }) : null,
+          h("div", { class: "gb-bar" + (v ? "" : " zero"), style: "height:" + Math.max(2, Math.round((v / max) * 100)) + "%" }),
+          h("span", { class: "gb-l", text: mostrarRot ? rot : "" }));
+      })),
+    h("p", { class: "graf-leg", text: "Marmitas vendidas por " + (porMes ? "mês" : "dia da venda (entrega)") }));
+}
+function renderInicio() {
+  const v = $("vInicio");
+  const arr = doPeriodo();
+  const n = numeros(arr);
+  const filhos = [];
+  filhos.push(cardPre());
+  filhos.push(cardDisparos());
+  filhos.push(h("div", { class: "kpis" },
+    kpi("Faturamento", brl(n.faturamento), plural(n.pedidos, "pedido", "pedidos") + " · " + plural(n.marmitas, "marmita", "marmitas"), null, null, true),
+    kpi("Recebido", brl(n.recebido), n.aReceber ? "Falta " + brl(n.aReceber) : "Tudo recebido", "var(--ok)", () => irParaPedidos("todos", "pagos")),
+    kpi("Pedidos recebidos", String(n.recebidos), n.cancelados ? n.cancelados + " cancelados" : "nenhum cancelado", "var(--brand)", () => irParaPedidos("todos")),
+    kpi("Entregues", String(n.entregues), n.pedidos ? Math.round((n.entregues / n.pedidos) * 100) + "% dos pedidos" : "—", "var(--ok)", () => irParaPedidos("entregue")),
+    kpi("Reservados", String(n.pendentes), "aguardando o dia da entrega", "var(--warn)", () => irParaPedidos("pendente")),
+    kpi("Na rua", String(n.naRua), "saíram para entrega", "var(--info)", () => irParaPedidos("saiu")),
+    kpi("A receber", brl(n.aReceber), plural(n.aReceberN, "pedido", "pedidos"), "var(--bad)", () => irParaPedidos("todos", "aberto")),
+    kpi("Ticket médio", brl(n.pedidos ? n.faturamento / n.pedidos : 0), "por pedido", "var(--accent)"),
+  ));
+  filhos.push(cardEspera());
+  filhos.push(cardEstoque());
+  filhos.push(cardLucro(n));
+  filhos.push(h("div", { class: "card" }, h("h3", { text: "Vendas no período" }), grafico(arr)));
+  const at = arr.filter(ativo);
+  const bairros = new Map();
+  for (const p of at) bairros.set(bairroDe(p), (bairros.get(bairroDe(p)) || 0) + (Number(p.qtd) || 0));
+  const links = [1, 2, 0].map((l) => ({ r: l ? nomeLink(l) : "Sem link / manual", v: at.filter((p) => (Number(p.link) || 0) === l).length }));
+  filhos.push(h("div", { class: "duas" },
+    h("div", { class: "card" }, h("h3", { text: "Pagamentos" }), distLinhas([
+      { r: "Pix", v: n.pix, txt: brl(n.pix), cor: "var(--ok)" },
+      { r: "Dinheiro", v: n.dinheiro, txt: brl(n.dinheiro), cor: "var(--accent)" },
+      { r: "Cartão", v: n.cartao, txt: brl(n.cartao), cor: "var(--info)" },
+      { r: "A receber", v: n.aReceber, txt: brl(n.aReceber), cor: "var(--bad)" },
+    ])),
+    h("div", { class: "card" }, h("h3", { text: "Pedidos por link" }), distLinhas(links)),
+  ));
+  const topB = [...bairros.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6).map(([r, q]) => ({ r, v: q, txt: plural(q, "marmita", "marmitas") }));
+  filhos.push(h("div", { class: "card" }, h("h3", { text: "Bairros que mais pedem" }), topB.length ? distLinhas(topB, "var(--accent)") : h("p", { class: "muted", text: "Sem pedidos no período." })));
+  v.replaceChildren(...filhos.filter(Boolean));
+}
+function cardEstoque() {
+  const vd = estado.venda;
+  const arr = todos().filter((p) => vendaDe(p) === vd.data && ativo(p));
+  const vendidas = soma(arr, (p) => p.qtd) + (Number(vd.ajuste) || 0);
+  const total = Number(vd.total) || 0;
+  const restam = Math.max(0, total - vendidas);
+  return h("div", { class: "card" },
+    h("div", { class: "estq-top" },
+      h("h3", { text: "Estoque · entrega " + vendaTxt(vd.data), style: "margin:0" }),
+      h("span", { class: "pill " + (vd.aberta ? "st-entregue" : "st-cancelado"), text: vd.aberta ? "Vendas abertas" : "Encerradas" })),
+    h("div", { class: "estq-top", style: "margin-top:8px" },
+      h("span", { class: "estq-num", text: restam + " restantes" }),
+      h("span", { class: "muted mono", text: vendidas + " de " + total })),
+    h("div", { class: "barra" }, h("span", { style: "width:" + (total ? Math.min(100, Math.round((vendidas / total) * 100)) : 0) + "%" })),
+    h("div", { class: "estq-meta" },
+      h("span", { text: "Preço " + brl(vd.preco) }), h("span", { text: "Saída " + vd.horario }),
+      vd.ajuste ? h("span", { text: vd.ajuste + " reservas fora do sistema" }) : null,
+      h("button", { type: "button", class: "ped-acao", text: "Configurar venda", onclick: abrirConfig })));
+}
+
+/* pedidos */
+function filtrarPedidos(arr) {
+  const q = norm(estado.busca);
+  return arr.filter((p) => {
+    if (estado.pag === "pagos" && !pago(p)) return false;
+    if (estado.pag === "aberto" && (pago(p) || !ativo(p))) return false;
+    if (estado.link !== "todos" && String(Number(p.link) || 0) !== estado.link) return false;
+    if (q && !(norm(p.nome).includes(q) || norm(p.endereco).includes(q) || String(p.whatsapp || "").includes(q.replace(/\D/g, "") || "§") || String(p.numero) === q || norm(p.codigo) === q)) return false;
+    return true;
+  });
+}
+function renderPedidos() {
+  const v = $("vPedidos");
+  const base = filtrarPedidos(doPeriodo());
+  const cont = { todos: base.length };
+  for (const s of STATUS) cont[s.v] = base.filter((p) => p.status === s.v).length;
+  let lista = estado.st === "todos" ? base : base.filter((p) => p.status === estado.st);
+  const porVenda = periodoAtual().tipo === "venda";
+  lista.sort(porVenda ? (a, b) => (a.numero || 0) - (b.numero || 0) : (a, b) => vendaMs(b) - vendaMs(a) || (a.numero || 0) - (b.numero || 0));
+  const abas = h("div", { class: "abas", role: "tablist", "aria-label": "Situação" },
+    ...[{ v: "todos", r: "Todos" }, ...STATUS].map((s) => h("button", {
+      type: "button", class: "aba", role: "tab", "aria-selected": String(estado.st === s.v),
+      onclick: () => { estado.st = s.v; estado.limite = 60; renderPedidos(); },
+    }, s.r, h("small", { text: String(cont[s.v] || 0) }))));
+  const busca = h("input", { class: "campo", type: "search", placeholder: "Buscar nome, endereço, telefone ou nº", value: estado.busca, "aria-label": "Buscar pedido" });
+  busca.addEventListener("input", () => { estado.busca = busca.value; estado.limite = 60; const pos = busca.selectionStart; renderPedidos(); const nb = $("vPedidos").querySelector("input[type=search]"); nb.focus(); try { nb.setSelectionRange(pos, pos); } catch (e) { /* ok */ } });
+  const selPag = h("select", { class: "campo", "aria-label": "Pagamento" },
+    ...[["todos", "Pagamentos"], ["pagos", "Só pagos"], ["aberto", "Só a receber"]].map(([k, r]) => h("option", { value: k, text: r, selected: estado.pag === k })));
+  selPag.addEventListener("change", () => { estado.pag = selPag.value; renderPedidos(); });
+  const selLink = h("select", { class: "campo", "aria-label": "Link" },
+    ...[["todos", "Todos links"], ["1", "Manel 1"], ["2", "Manel 2"], ["0", "Sem link"]].map(([k, r]) => h("option", { value: k, text: r, selected: estado.link === k })));
+  selLink.addEventListener("change", () => { estado.link = selLink.value; renderPedidos(); });
+  const abertos = () => lista.filter((p) => p.status === "pendente" || p.status === "saiu");
+  const ferramentas = h("div", { class: "abas ferramentas", "aria-label": "Ferramentas" },
+    h("button", { type: "button", class: "aba", text: "📍 Lista por bairro", onclick: () => { const a = abertos(); if (!a.length) return toast("Nenhuma entrega pendente nesta lista."); abrirTexto("Entregas por bairro", "Agrupadas por bairro para montar a rota.", textoPorBairro(a)); } }),
+    h("button", { type: "button", class: "aba", text: "🛵 Lista de entregas", onclick: () => { const a = abertos(); if (!a.length) return toast("Nenhuma entrega pendente nesta lista."); abrirTexto("Lista de entregas", "Na ordem dos pedidos. Mande para quem vai entregar.", textoLista(a)); } }),
+    h("button", { type: "button", class: "aba", text: "💬 Mensagens aos clientes", onclick: abrirMensagens }),
+    h("button", { type: "button", class: "aba", text: "📊 Resumo", onclick: () => abrirTexto("Resumo do período", rotuloPeriodo(), textoResumo(), false) }),
+    h("button", { type: "button", class: "aba", text: "📥 Exportar planilha", onclick: exportarPlanilha }));
+  const itens = lista.slice(0, estado.limite).map(cardPedido);
+  v.replaceChildren(...[
+    cardPre(),
+    abas,
+    busca,
+    h("div", { class: "filtros-linha", style: "grid-template-columns:1fr 1fr" }, selPag, selLink),
+    ferramentas,
+    h("div", { class: "sec-h" }, h("h2", { text: plural(lista.length, "pedido", "pedidos") }), h("span", { class: "muted mono", text: brl(soma(lista.filter(ativo), (p) => p.total)) })),
+    lista.length ? h("div", { class: "pedidos" }, ...itens) : h("div", { class: "card vazio" }, h("b", { text: "Nenhum pedido aqui" }), "Troque o período no topo ou os filtros."),
+    lista.length > estado.limite ? h("div", { class: "mais-itens" }, h("button", { type: "button", class: "btn btn-sec", text: "Mostrar mais " + Math.min(60, lista.length - estado.limite), onclick: () => { estado.limite += 60; renderPedidos(); } })) : null,
+  ].filter(Boolean));
+}
+function proximoStatus(p) { return p.status === "pendente" ? { v: "saiu", r: "Saiu" } : p.status === "saiu" ? { v: "entregue", r: "Entregue" } : null; }
+function cardPedido(p) {
+  const prox = proximoStatus(p);
+  const el = h("div", { class: "ped" + (p.status === "cancelado" ? " cancelado" : ""), role: "button", tabindex: "0", "aria-label": "Pedido " + n2(p.numero) + " de " + p.nome },
+    h("div", { class: "ped-num" }, h("span", null, n2(p.numero), h("small", { text: "nº" }))),
+    h("div", { class: "ped-nome", text: p.nome || "Sem nome" }),
+    h("div", { class: "ped-val", text: brl(p.total) }),
+    h("div", { class: "ped-info", text: bairroDe(p) + " · " + plural(p.qtd, "marmita", "marmitas") + (p.formaPag && !pago(p) ? " · " + p.formaPag : "") }),
+    h("div", { class: "ped-pills" },
+      h("span", { class: "pill st-" + (p.status || "pendente"), text: STATUS_TXT[p.status] || "Reservado" }),
+      h("span", { class: "pill " + (pago(p) ? "pg-ok" : "pg-aberto"), text: pago(p) ? "Pago" : "A receber" })),
+    h("div", { class: "ped-rod" },
+      h("span", { text: "Reservado " + dataCurta(quandoDe(p)) + " · " + (Number(p.link) ? "link " + p.link : "manual") + (periodoAtual().tipo !== "venda" ? " · venda " + vendaTxt(vendaDe(p)).split(", ")[1] : "") }),
+      prox ? h("button", { type: "button", class: "ped-acao", text: "Marcar: " + prox.r, onclick: (e) => { e.stopPropagation(); mudar(p.id, { status: prox.v }); } }) : null));
+  el.addEventListener("click", () => abrirPedido(p.id));
+  el.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrirPedido(p.id); } });
+  return el;
+}
+
+/* clientes */
+function clientesDe(arr) {
+  const mapa = new Map();
+  for (const p of arr) {
+    const chave = (p.whatsapp || "").replace(/\D/g, "") || "n:" + norm(p.nome);
+    let c = mapa.get(chave);
+    if (!c) { c = { chave, nome: p.nome, whatsapp: p.whatsapp || "", bairro: bairroDe(p), pedidos: [], gasto: 0, marmitas: 0, ultimo: 0 }; mapa.set(chave, c); }
+    c.pedidos.push(p);
+    if (ativo(p)) { c.gasto += Number(p.total) || 0; c.marmitas += Number(p.qtd) || 0; }
+    if (quandoDe(p) >= c.ultimo) { c.ultimo = quandoDe(p); c.nome = p.nome || c.nome; c.bairro = bairroDe(p); }
+  }
+  return [...mapa.values()];
+}
+function renderClientes() {
+  const v = $("vClientes");
+  let lista = clientesDe(doPeriodo());
+  const q = norm(estado.cliBusca);
+  if (q) lista = lista.filter((c) => norm(c.nome).includes(q) || c.whatsapp.includes(q.replace(/\D/g, "") || "§") || norm(c.bairro).includes(q));
+  const ord = { gasto: (a, b) => b.gasto - a.gasto, pedidos: (a, b) => b.pedidos.length - a.pedidos.length || b.gasto - a.gasto, recente: (a, b) => b.ultimo - a.ultimo, nome: (a, b) => a.nome.localeCompare(b.nome, "pt-BR") };
+  lista.sort(ord[estado.cliOrdem] || ord.gasto);
+  const recorrentes = lista.filter((c) => c.pedidos.filter(ativo).length > 1).length;
+  const busca = h("input", { class: "campo", type: "search", placeholder: "Buscar cliente, telefone ou bairro", value: estado.cliBusca, "aria-label": "Buscar cliente" });
+  busca.addEventListener("input", () => { estado.cliBusca = busca.value; const pos = busca.selectionStart; renderClientes(); const nb = $("vClientes").querySelector("input[type=search]"); nb.focus(); try { nb.setSelectionRange(pos, pos); } catch (e) { /* ok */ } });
+  const sel = h("select", { class: "campo", "aria-label": "Ordenar" }, ...[["gasto", "Quem mais gastou"], ["pedidos", "Mais pedidos"], ["recente", "Mais recentes"], ["nome", "Nome A-Z"]].map(([k, r]) => h("option", { value: k, text: r, selected: estado.cliOrdem === k })));
+  sel.addEventListener("change", () => { estado.cliOrdem = sel.value; renderClientes(); });
+  v.replaceChildren(
+    h("div", { class: "kpis" },
+      kpi("Clientes", String(lista.length), "no período", "var(--brand)"),
+      kpi("Voltaram a pedir", String(recorrentes), lista.length ? Math.round((recorrentes / lista.length) * 100) + "% dos clientes" : "—", "var(--ok)")),
+    busca, sel,
+    lista.length ? h("div", { class: "pedidos" }, ...lista.slice(0, 150).map((c) => {
+      const iniciais = (c.nome || "?").split(" ").filter(Boolean).slice(0, 2).map((x) => x[0]).join("").toUpperCase();
+      const n = c.pedidos.filter(ativo).length;
+      return h("button", { type: "button", class: "cli", onclick: () => abrirCliente(c) },
+        h("span", { class: "avatar", text: iniciais || "?" }),
+        h("span", { class: "cli-nome", text: c.nome || "Sem nome" }),
+        h("span", { class: "cli-val" }, brl(c.gasto), h("small", { text: plural(n, "pedido", "pedidos") })),
+        h("span", { class: "cli-info", text: (c.whatsapp ? fmtFone(c.whatsapp) + " · " : "") + c.bairro + " · último " + dataCurta(c.ultimo).split(" ")[0] }));
+    })) : h("div", { class: "card vazio" }, h("b", { text: "Nenhum cliente no período" }), "Troque o período no topo para ver mais."));
+}
+
+/* mais */
+function renderMais() {
+  const v = $("vMais");
+  const vd = estado.venda;
+  const linkLinha = (rot, url) => h("div", { class: "link-linha" }, h("div", null, h("b", { text: rot, style: "display:block;font-size:.8rem" }), h("code", { text: url })), h("button", { type: "button", class: "ped-acao", text: "Copiar", onclick: () => copiar(url) }));
+  const menuItem = (rot, sub, fn) => h("button", { type: "button", class: "menu-item", onclick: fn }, icone("seta"), h("span", { text: rot }), sub ? h("small", { text: sub }) : null);
+  v.replaceChildren(
+    h("div", { class: "sec-h" }, h("h2", { text: "Venda atual" })),
+    h("div", { class: "card" },
+      h("dl", { class: "dl" },
+        h("div", null, h("dt", { text: "Entrega" }), h("dd", { text: vendaTitulo(vd.data) + " · saída " + vd.horario })),
+        h("div", null, h("dt", { text: "Preço" }), h("dd", { text: brl(vd.preco) + " a marmita" })),
+        h("div", null, h("dt", { text: "Estoque" }), h("dd", { text: vd.total + " marmitas" + (vd.ajuste ? " (" + vd.ajuste + " reservas fora do sistema)" : "") })),
+        h("div", null, h("dt", { text: "Situação" }), h("dd", { text: vd.aberta ? "Vendas abertas" : "Vendas encerradas" }))),
+      h("button", { type: "button", class: "btn btn-pri btn-bloco", style: "margin-top:12px", text: "Configurar venda / nova venda", onclick: abrirConfig })),
+    h("div", { class: "sec-h" }, h("h2", { text: "Links para divulgar" })),
+    h("div", { class: "card links-venda" },
+      linkLinha("Seu link (Manel 1)", CFG.site + "/?v=1"),
+      linkLinha("Link do vendedor (Manel 2)", CFG.site + "/?v=2"),
+      h("p", { class: "dica", text: "Acrescente &utm_source=nome no final para saber de onde veio (ex.: &utm_source=instagram)." })),
+    h("div", { class: "sec-h" }, h("h2", { text: "Ferramentas" })),
+    h("div", { class: "card menu" },
+      menuItem("Acessos aos links", "visitas e conversão", abrirAcessos),
+      menuItem("Mensagens aos clientes", "aviso, saí, obrigado", abrirMensagens),
+      menuItem("Resumo do período", rotuloPeriodo(), () => abrirTexto("Resumo do período", rotuloPeriodo(), textoResumo(), false)),
+      menuItem("Anunciar nova venda", "para clientes antigos", () => abrirMensagens("nova")),
+      menuItem("Lembrete: a venda é hoje", "quem ainda não pediu", () => abrirMensagens("lembrete")),
+      menuItem("Lista de espera", ESP.linhas.length ? plural(ESP.linhas.length, "pessoa", "pessoas") : "vazia", abrirEspera),
+      menuItem("Custos e lucro", "venda de " + vendaTxt(estado.venda.data).split(", ")[1], () => abrirCustos(estado.venda.data)),
+      menuItem("Exportar planilha", rotuloPeriodo(), exportarPlanilha),
+      menuItem("Colar pedido do WhatsApp", null, () => abrirNovo("colar"))),
+    h("div", { class: "sec-h" }, h("h2", { text: "Aparelho" })),
+    h("div", { class: "card menu" },
+      h("div", { class: "menu-item interruptor" }, h("span", { text: "Som de pré-reserva nova" }),
+        h("button", { type: "button", class: "sw", role: "switch", "aria-checked": String(ALERTA.som), "aria-label": "Som", onclick: (e) => { alternarSom(); e.currentTarget.setAttribute("aria-checked", String(ALERTA.som)); } })),
+      menuItem("Sair deste aparelho", "pede o código de novo", () => { guarda.gravar("vdm-token", null); location.reload(); })),
+  );
+}
+
+/* ---------- folha (janela de baixo) ---------- */
+let focoAntes = null;
+function abrirFolha(titulo, conteudo, tipo, extra) {
+  if ($("folha").hidden) focoAntes = document.activeElement;
+  estado.folha = { tipo: tipo || "geral", ...(extra || {}) };
+  $("folhaT").textContent = titulo;
+  $("folhaC").replaceChildren(...[].concat(conteudo).filter(Boolean));
+  $("folha").hidden = false;
+  document.body.style.overflow = "hidden";
+  const painel = $("folha").querySelector(".folha-painel");
+  painel.scrollTop = 0;
+  painel.focus({ preventScroll: true });
+}
+function fecharFolha() {
+  $("folha").hidden = true;
+  estado.folha = null;
+  document.body.style.overflow = "";
+  if (focoAntes && focoAntes.focus) try { focoAntes.focus({ preventScroll: true }); } catch (e) { /* ok */ }
+}
+$("folha").addEventListener("click", (e) => { if (e.target.closest("[data-fechar]")) fecharFolha(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !$("folha").hidden) fecharFolha(); });
+function abrirTexto(titulo, info, texto, comWhats = true) {
+  const area = h("textarea", { class: "campo texto-saida", readonly: true, "aria-label": titulo });
+  area.value = texto;
+  abrirFolha(titulo, [
+    h("p", { class: "muted", text: info, style: "margin:0" }),
+    area,
+    h("div", { class: comWhats ? "btns-2" : "" },
+      h("button", { type: "button", class: "btn btn-sec btn-bloco", text: "Copiar texto", onclick: () => copiar(texto, () => { area.focus(); area.select(); }) }),
+      comWhats ? h("a", { class: "btn btn-ok btn-bloco", href: linkWhats("", texto), target: "_blank", rel: "noopener noreferrer" }, icone("whats"), "Mandar no WhatsApp") : null),
+  ]);
+}
+function seg(opcoes, atual, aoEscolher) {
+  const g = h("div", { class: "seg", role: "radiogroup", style: "--n:" + opcoes.length });
+  for (const o of opcoes) g.append(h("button", { type: "button", role: "radio", "aria-checked": String(o.v === atual), text: o.r, onclick: () => aoEscolher(o.v) }));
+  return g;
+}
+
+/* ---------- pedido: detalhe ---------- */
+function abrirPedido(id) {
+  if (!estado.pedidos.has(id)) return;
+  abrirFolha("Pedido", [], "pedido", { id, confirmando: false, linkMp: null });
+  renderFolhaPedido();
+}
+function renderFolhaPedido() {
+  const f = estado.folha;
+  const p = estado.pedidos.get(f.id);
+  if (!p) { fecharFolha(); return; }
+  $("folhaT").textContent = "Pedido nº " + n2(p.numero) + " · #" + p.codigo;
+  const dl = (k, v) => v ? h("div", null, h("dt", { text: k }), h("dd", { text: v })) : null;
+  const zap = p.whatsapp ? h("a", { class: "btn btn-ok", href: linkWhats("55" + p.whatsapp, "Olá, " + ((p.nome || "").split(" ")[0] || "tudo bem") + "! Aqui é o Manel, do " + CFG.marca + ", sobre o seu pedido #" + p.codigo + "."), target: "_blank", rel: "noopener noreferrer" }, icone("whats"), "Chamar cliente") : h("span", { class: "btn btn-sec", "aria-disabled": "true", text: "Sem WhatsApp" });
+  const cobrar = h("button", { type: "button", class: "btn btn-mp", text: "💳 Cobrar no Mercado Pago", onclick: () => cobrarMp(p) });
+  const enviarLinkMp = f.linkMp ? h("a", { class: "btn btn-ok btn-bloco", href: f.linkMp, target: "_blank", rel: "noopener noreferrer" }, icone("whats"), "Enviar link de pagamento ao cliente") : null;
+  const conteudo = [
+    h("div", { class: "det-top" }, h("div", { class: "det-num", text: n2(p.numero) }),
+      h("div", null, h("b", { text: p.nome || "Sem nome" }), h("span", { text: plural(p.qtd, "marmita", "marmitas") + " · " + brl(p.total) + " · entrega " + entregaTxtDe(p) }))),
+    h("div", { class: "card" }, h("dl", { class: "dl" },
+      dl("WhatsApp", p.whatsapp ? fmtFone(p.whatsapp) : "Não informado"),
+      dl("Endereço", ruaDe(p)), dl("Bairro", bairroDe(p)),
+      dl("Pagamento", PAGTO_TXT[p.pagamento] || "A receber"),
+      dl("Cliente escolheu", p.formaPag),
+      dl("Origem", (p.origem === "link" ? "Site" : "Manual") + " · " + (Number(p.link) ? nomeLink(Number(p.link)) : "sem link")),
+      dl("Venda", vendaTitulo(vendaDe(p))),
+      dl("Reservado em", dataCurta(quandoDe(p))),
+      dl("Saiu em", p.saiuEm ? dataCurta(p.saiuEm) : null),
+      dl("Entregue em", p.entregueEm ? dataCurta(p.entregueEm) : null))),
+    h("div", null, h("span", { class: "rotulo", text: "Situação" }), seg(STATUS, p.status || "pendente", (v) => mudar(p.id, { status: v }))),
+    h("div", null, h("span", { class: "rotulo", text: "Pagamento" }), seg(PAGTO, p.pagamento || "aberto", (v) => mudar(p.id, { pagamento: v }))),
+    h("div", { class: "acoes" },
+      zap,
+      h("a", { class: "btn btn-sec", href: linkMapa(p.endereco), target: "_blank", rel: "noopener noreferrer", text: "Ver no mapa" }),
+      h("a", { class: "btn btn-sec", href: linkWhats("", textoNota(p)), target: "_blank", rel: "noopener noreferrer", text: "Nota p/ entregador" }),
+      h("button", { type: "button", class: "btn btn-sec", text: "Editar dados", onclick: () => abrirNovo("editar", p) }),
+      !pago(p) && ativo(p) ? h("div", { class: "btn-bloco", style: "display:grid" }, cobrar) : null,
+      enviarLinkMp),
+    f.confirmando
+      ? h("div", { class: "confirmar" }, "Excluir o pedido nº " + n2(p.numero) + " de " + (p.nome || "cliente") + "? Ele sai de todos os números.",
+          h("div", { class: "btns-2" },
+            h("button", { type: "button", class: "btn btn-sec", text: "Voltar", onclick: () => { f.confirmando = false; renderFolhaPedido(); } }),
+            h("button", { type: "button", class: "btn btn-pri", style: "background:var(--bad)", text: "Excluir", onclick: () => excluirPedido(p) })))
+      : h("button", { type: "button", class: "btn btn-bad btn-bloco", text: "Excluir pedido", onclick: () => { f.confirmando = true; renderFolhaPedido(); } }),
+  ];
+  $("folhaC").replaceChildren(...conteudo.filter(Boolean));
+}
+async function excluirPedido(p) {
+  const { id, ...dados } = p;
+  try {
+    await estado.db.apagar("pedidos", id);
+    estado.pedidos.delete(id);
+    fecharFolha();
+    renderTudo();
+    toast("Pedido nº " + n2(p.numero) + " excluído.", { rotulo: "Desfazer", fazer: async () => {
+      try { await estado.db.gravar("pedidos", id, dados, false); estado.pedidos.set(id, p); renderTudo(); } catch (e) { toast(msgErro()); }
+    } });
+  } catch (e) { toast(msgErro()); }
+}
+async function cobrarMp(p) {
+  const f = estado.folha;
+  toast("Gerando link de pagamento…");
+  try {
+    const r = await fetch(CFG.banco.url + "/functions/v1/mp-checkout", {
+      method: "POST", headers: { apikey: CFG.banco.chave, Authorization: "Bearer " + CFG.banco.chave, "Content-Type": "application/json" },
+      body: JSON.stringify({ codigo: p.id }),
+    });
+    const d = await r.json();
+    if (!r.ok || !d.url) throw new Error("sem link");
+    const msg = "Olá, " + ((p.nome || "").split(" ")[0] || "tudo bem") + "! Aqui é o Manel, do " + CFG.marca + " 🍤\n\nSegue o link para pagar seu pedido #" + p.codigo + " (" + plural(p.qtd, "marmita", "marmitas") + ", " + brl(d.valor) + ") com cartão ou Pix pelo Mercado Pago:\n" + d.url + "\n\nObrigado!";
+    if (p.whatsapp) { if (estado.folha === f) { f.linkMp = linkWhats("55" + p.whatsapp, msg); renderFolhaPedido(); } toast("Link pronto. Toque em Enviar link."); }
+    else abrirTexto("Link de pagamento", "Copie e mande para o cliente.", msg);
+  } catch (e) { toast("Não deu para gerar o link agora. Confira a configuração do Mercado Pago."); }
+}
+
+/* ---------- novo pedido / editar / colar ---------- */
+function abrirNovo(modo, p) {
+  const ed = modo === "editar";
+  const n = { modo: modo === "colar" ? "colar" : ed ? "editar" : "manual", qtd: ed ? Number(p.qtd) || 1 : 1, lidos: [] };
+  const campo = (id, rot, attrs) => h("div", null, h("label", { class: "rotulo", for: id, text: rot }), h(attrs.tag || "input", { class: "campo", id, ...attrs, tag: null }), h("p", { class: "err", id: id + "Err", hidden: true }));
+  const abas = ed ? null : h("div", { class: "seg", style: "--n:2" },
+    h("button", { type: "button", role: "radio", "aria-checked": String(n.modo === "manual"), text: "Digitar pedido", onclick: () => abrirNovo("manual") }),
+    h("button", { type: "button", role: "radio", "aria-checked": String(n.modo === "colar"), text: "Colar do WhatsApp", onclick: () => abrirNovo("colar") }));
+  if (n.modo === "colar") {
+    const area = h("textarea", { class: "campo", id: "nCola", placeholder: "Cole aqui uma ou mais mensagens de pedido do WhatsApp", "aria-label": "Mensagem do WhatsApp" });
+    const prev = h("div", { class: "prev", id: "nPrev" });
+    const salvar = h("button", { type: "button", class: "btn btn-pri btn-bloco", text: "Registrar", disabled: true });
+    area.addEventListener("input", () => {
+      n.lidos = lerPedidos(area.value, CFG.ddd);
+      prev.replaceChildren(...n.lidos.map((x) => h("div", { class: "prev-item" }, h("b", { text: (x.nome || "Sem nome") + " · " + plural(x.qtd, "marmita", "marmitas") }), (x.codigo ? "#" + x.codigo + " · " : "") + x.endereco + (x.pagamento ? " · " + x.pagamento : ""))));
+      if (area.value.trim() && !n.lidos.length) prev.replaceChildren(h("p", { class: "err", text: "Não encontrei um pedido nesse texto. Use Digitar pedido." }));
+      salvar.disabled = !n.lidos.length;
+      salvar.textContent = n.lidos.length > 1 ? "Registrar " + n.lidos.length + " pedidos" : "Registrar pedido";
+    });
+    salvar.addEventListener("click", async () => {
+      salvar.disabled = true;
+      try {
+        const r = await registrar(n.lidos);
+        fecharFolha();
+        toast(r.feitos.length ? plural(r.feitos.length, "pedido registrado", "pedidos registrados") + (r.repetidos.length ? " · " + r.repetidos.length + " já existia" : "") : "Esse pedido já estava registrado.");
+        if (r.feitos.length === 1) abrirPedido(r.feitos[0].id);
+      } catch (e) { salvar.disabled = false; toast(msgErro()); }
+    });
+    abrirFolha("Novo pedido", [abas, area, prev, salvar], "novo");
+    area.focus();
+    return;
+  }
+  const rua = ed ? ruaDe(p) : "", bairro = ed ? (bairroDe(p) === "Sem bairro" ? "" : bairroDe(p)) : "";
+  const qtdOut = h("output", { text: String(n.qtd), "aria-live": "polite" });
+  const total = h("b", { class: "mono" });
+  const preco = ed ? Number(p.preco) || Number(estado.venda.preco) : Number(estado.venda.preco);
+  const atual = () => { qtdOut.textContent = String(n.qtd); total.textContent = brl(n.qtd * preco); };
+  const qtd = h("div", { class: "qtd" },
+    h("button", { type: "button", "aria-label": "Menos", text: "−", onclick: () => { n.qtd = Math.max(1, n.qtd - 1); atual(); } }), qtdOut,
+    h("button", { type: "button", "aria-label": "Mais", text: "+", onclick: () => { n.qtd = Math.min(99, n.qtd + 1); atual(); } }));
+  atual();
+  const selLink = h("select", { class: "campo", id: "nLink" }, ...[["0", "Sem link / manual"], ["1", CFG.links[1]], ["2", CFG.links[2]]].map(([k, r]) => h("option", { value: k, text: r, selected: String(ed ? Number(p.link) || 0 : 0) === k })));
+  const selPag = h("select", { class: "campo", id: "nPag" }, ...PAGTO.map((o) => h("option", { value: o.v, text: o.v === "aberto" ? "A receber" : "Já pago: " + o.r, selected: (ed ? p.pagamento || "aberto" : "aberto") === o.v })));
+  const salvar = h("button", { type: "button", class: "btn btn-pri btn-bloco", text: ed ? "Salvar alterações" : "Registrar pedido" });
+  const corpo = [
+    abas,
+    campo("nNome", "Nome do cliente", { type: "text", autocomplete: "off", maxlength: "60", value: ed ? p.nome : "" }),
+    campo("nFone", "WhatsApp (opcional)", { type: "tel", inputmode: "tel", maxlength: "20", placeholder: "(93) 99999-9999", value: ed && p.whatsapp ? fmtFone(p.whatsapp) : "" }),
+    campo("nRua", "Endereço (rua, número, referência)", { type: "text", maxlength: "160", value: rua }),
+    campo("nBairro", "Bairro", { type: "text", maxlength: "40", value: bairro }),
+    h("div", { class: "grade-2" },
+      h("div", null, h("span", { class: "rotulo", text: "Quantidade" }), qtd),
+      h("div", null, h("span", { class: "rotulo", text: "Total" }), h("div", { style: "font-size:1.3rem;padding-top:8px" }, total))),
+    h("div", { class: "grade-2" },
+      h("div", null, h("label", { class: "rotulo", for: "nLink", text: "Veio de qual link" }), selLink),
+      h("div", null, h("label", { class: "rotulo", for: "nPag", text: "Pagamento" }), selPag)),
+    ed ? null : h("p", { class: "dica", text: "Entra na venda de " + vendaTxt(estado.venda.data) + " a " + brl(estado.venda.preco) + " a marmita." }),
+    salvar,
+  ];
+  abrirFolha(ed ? "Editar pedido nº " + n2(p.numero) : "Novo pedido", corpo, "novo");
+  const erro = (id, msg) => { const e = $(id + "Err"); e.textContent = msg || ""; e.hidden = !msg; if (msg) $(id).setAttribute("aria-invalid", "true"); else $(id).removeAttribute("aria-invalid"); return !msg; };
+  salvar.addEventListener("click", async () => {
+    const nome = limpa($("nNome").value, 60), foneBruto = $("nFone").value.trim(), fone = normFone(foneBruto, CFG.ddd);
+    const r = limpa($("nRua").value, 160), b = limpa($("nBairro").value, 40);
+    const ok = [erro("nNome", nome.length >= 2 ? "" : "Escreva o nome."), erro("nFone", !foneBruto || fone ? "" : "Número incompleto. Use DDD e número."), erro("nRua", r.length >= 4 ? "" : "Escreva o endereço.")];
+    if (!ok.every(Boolean)) { $(["nNome", "nFone", "nRua"][ok.indexOf(false)]).focus(); return; }
+    const endereco = b ? r + " · Bairro: " + b : r;
+    salvar.disabled = true;
+    try {
+      if (ed) {
+        await mudar(p.id, { nome, whatsapp: fone || "", endereco, qtd: n.qtd, total: n.qtd * preco, link: Number(selLink.value), pagamento: selPag.value });
+        abrirPedido(p.id);
+        toast("Pedido atualizado.");
+      } else {
+        const res = await registrar([{ nome, whatsapp: fone || "", endereco, qtd: n.qtd, link: Number(selLink.value), pagamentoJa: selPag.value }]);
+        fecharFolha();
+        toast("Pedido nº " + n2(res.feitos[0].numero) + " registrado.");
+      }
+    } catch (e) { salvar.disabled = false; toast(msgErro()); }
+  });
+  $("nNome").focus();
+}
+
+/* ---------- período ---------- */
+function abrirPeriodo() {
+  const atual = periodoAtual();
+  const escolher = (p) => { estado.periodo = p; guarda.gravar("vdm2-periodo", p); estado.limite = 60; fecharFolha(); renderTudo(); };
+  const hoje = ymd(Date.now());
+  const opc = (rot, sub, p, marcado) => h("button", { type: "button", class: "menu-item", "aria-pressed": String(!!marcado), onclick: () => escolher(p) },
+    h("span", { text: (marcado ? "✓ " : "") + rot }), sub ? h("small", { text: sub }) : null);
+  const vendas = vendasExistentes();
+  const selVenda = h("select", { class: "campo", "aria-label": "Venda" }, ...vendas.map((d) => h("option", { value: d, text: vendaTitulo(d) + (d === estado.venda.data ? " (atual)" : ""), selected: atual.tipo === "venda" && atual.valor === d })));
+  const inDia = h("input", { class: "campo", type: "date", value: atual.tipo === "dia" ? atual.valor : hoje, "aria-label": "Dia" });
+  const inMes = h("input", { class: "campo", type: "month", value: atual.tipo === "mes" ? atual.valor : hoje.slice(0, 7), "aria-label": "Mês" });
+  const anos = [...new Set([new Date().getFullYear(), ...todos().map((p) => new Date(vendaMs(p)).getFullYear())])].sort().reverse();
+  const selAno = h("select", { class: "campo", "aria-label": "Ano" }, ...anos.map((y) => h("option", { value: y, text: String(y), selected: atual.tipo === "ano" && String(atual.valor) === String(y) })));
+  const linha = (rot, controle, fn) => h("div", null, h("span", { class: "rotulo", text: rot }), h("div", { class: "filtros-linha" }, controle, h("button", { type: "button", class: "btn btn-pri", text: "Ver", onclick: fn })));
+  abrirFolha("Escolher período", [
+    h("div", { class: "card menu" },
+      opc("Venda atual", vendaTitulo(estado.venda.data), { tipo: "venda", valor: null }, atual.tipo === "venda" && atual.valor === estado.venda.data),
+      opc("Hoje", vendaTxt(hoje), { tipo: "dia", valor: hoje }, atual.tipo === "dia" && atual.valor === hoje),
+      opc("Últimos 7 dias", null, { tipo: "7d" }, atual.tipo === "7d"),
+      opc("Este mês", MESES[new Date().getMonth()], { tipo: "mes", valor: hoje.slice(0, 7) }, atual.tipo === "mes" && atual.valor === hoje.slice(0, 7)),
+      opc("Este ano", hoje.slice(0, 4), { tipo: "ano", valor: hoje.slice(0, 4) }, atual.tipo === "ano" && String(atual.valor) === hoje.slice(0, 4)),
+      opc("Todo o período", null, { tipo: "tudo" }, atual.tipo === "tudo")),
+    linha("Por venda (data da entrega)", selVenda, () => escolher({ tipo: "venda", valor: selVenda.value })),
+    linha("Um dia de venda (entrega)", inDia, () => inDia.value && escolher({ tipo: "dia", valor: inDia.value })),
+    linha("Um mês", inMes, () => inMes.value && escolher({ tipo: "mes", valor: inMes.value })),
+    linha("Um ano", selAno, () => escolher({ tipo: "ano", valor: selAno.value })),
+    h("p", { class: "dica", text: "Tudo conta no dia da venda (dia da entrega), não no dia em que o cliente reservou. A data da reserva aparece em cada pedido." }),
+  ]);
+}
+
+/* ---------- cliente ---------- */
+function abrirCliente(c) {
+  const peds = c.pedidos.slice().sort((a, b) => quandoDe(b) - quandoDe(a));
+  abrirFolha(c.nome || "Cliente", [
+    h("div", { class: "kpis" },
+      kpi("Gastou", brl(c.gasto), plural(c.pedidos.filter(ativo).length, "pedido", "pedidos"), "var(--ok)"),
+      kpi("Marmitas", String(c.marmitas), c.bairro, "var(--accent)")),
+    c.whatsapp ? h("a", { class: "btn btn-ok btn-bloco", href: linkWhats("55" + c.whatsapp, "Olá, " + ((c.nome || "").split(" ")[0] || "tudo bem") + "! Aqui é o Manel, do " + CFG.marca + " 🍤"), target: "_blank", rel: "noopener noreferrer" }, icone("whats"), "Conversar no WhatsApp · " + fmtFone(c.whatsapp)) : null,
+    h("div", { class: "sec-h" }, h("h2", { text: "Pedidos" })),
+    h("div", { class: "pedidos" }, ...peds.map(cardPedido)),
+  ], "cliente");
+}
+
+/* ---------- configurar venda ---------- */
+function abrirConfig() {
+  const vd = estado.venda;
+  const campo = (id, rot, attrs, dica) => h("div", null, h("label", { class: "rotulo", for: id, text: rot }), h("input", { class: "campo", id, ...attrs }), dica ? h("p", { class: "dica", text: dica }) : null);
+  const sw = h("button", { type: "button", class: "sw", role: "switch", "aria-checked": String(!!vd.aberta), "aria-label": "Vendas abertas", onclick: () => sw.setAttribute("aria-checked", String(sw.getAttribute("aria-checked") !== "true")) });
+  const salvar = h("button", { type: "button", class: "btn btn-pri btn-bloco", text: "Salvar configuração" });
+  abrirFolha("Configurar venda", [
+    h("p", { class: "muted", style: "margin:0", text: "O site se atualiza sozinho com estes dados. Para começar uma venda nova, troque a data da entrega: os pedidos novos entram nela e o estoque recomeça." }),
+    h("div", { class: "card grade-form" },
+      campo("cfData", "Data da entrega", { type: "date", value: vd.data }),
+      h("div", { class: "grade-2" },
+        campo("cfHora", "Saída para entrega", { type: "text", maxlength: "10", value: vd.horario, placeholder: "11h30" }),
+        campo("cfPreco", "Preço da marmita (R$)", { type: "number", inputmode: "decimal", min: "1", step: "0.5", value: vd.preco })),
+      h("div", { class: "grade-2" },
+        campo("cfTotal", "Total de marmitas", { type: "number", inputmode: "numeric", min: "1", value: vd.total }),
+        campo("cfAjuste", "Reservas fora do sistema", { type: "number", inputmode: "numeric", min: "0", value: vd.ajuste || 0 }, "Contam no estoque.")),
+      campo("cfProduto", "Prato", { type: "text", maxlength: "40", value: vd.produto }),
+      h("div", { class: "interruptor" }, h("span", { class: "rotulo", style: "margin:0", text: "Vendas abertas no site" }), sw)),
+    salvar,
+  ], "config");
+  salvar.addEventListener("click", async () => {
+    const nova = {
+      data: $("cfData").value || vd.data,
+      horario: limpa($("cfHora").value, 10) || "11h30",
+      preco: Math.max(1, Number(String($("cfPreco").value).replace(",", ".")) || vd.preco),
+      total: Math.max(1, Math.round(Number($("cfTotal").value) || vd.total)),
+      ajuste: Math.max(0, Math.round(Number($("cfAjuste").value) || 0)),
+      produto: limpa($("cfProduto").value, 40) || "Vatapá de Frango",
+      aberta: sw.getAttribute("aria-checked") === "true",
+    };
+    salvar.disabled = true;
+    try {
+      await estado.db.gravar("config", "venda", nova, false);
+      await estado.db.gravar("config", "estoque", { total: nova.total, siteTotal: nova.total }, true).catch(() => {});
+      const mudouData = nova.data !== vd.data;
+      estado.venda = nova;
+      if (mudouData && periodoAtual().tipo === "venda") { estado.periodo = { tipo: "venda", valor: null }; guarda.gravar("vdm2-periodo", estado.periodo); }
+      $("topVenda").textContent = "Entrega " + vendaTxt(nova.data) + " · " + (nova.aberta ? "vendas abertas" : "vendas encerradas");
+      fecharFolha();
+      renderTudo();
+      toast(mudouData ? "Venda nova configurada para " + vendaTxt(nova.data) + "." : "Configuração salva. O site já mostra os dados novos.");
+    } catch (e) { salvar.disabled = false; toast(msgErro()); }
+  });
+}
+
+/* ---------- mensagens aos clientes ---------- */
+const AV_PAG = "Para eu já deixar tudo separado, me confirma como você vai pagar:\n1️⃣ Pix\n2️⃣ Dinheiro (precisa de troco? Para quanto?)\n3️⃣ Cartão";
+const AV_MODOS = {
+  lembrete: { rotulo: "🔔 Lembrete: a venda é hoje (quem ainda não pediu)", clientes: true, utm: "lembrete-hoje",
+    padrao: "Bom dia, {nome}! 🍤\n\nHoje é dia de Vatapá do Manel! 🎉\nAinda dá tempo de garantir a sua marmita de vatapá de frango para hoje, {data}.\n\n💰 {preco} a marmita, entrega grátis\n🛵 Entregas a partir das {horario}\n\nAs últimas marmitas estão saindo. Peça pelo link (toque em \"Já comprei antes\" que seus dados aparecem):\n{link}\n\nOu me responda aqui que eu anoto! 😉",
+    pag: () => "" },
+  nova: { rotulo: "📣 Anunciar nova venda (clientes antigos)", clientes: true, utm: "aviso-clientes",
+    padrao: "Oi, {nome}! Aqui é o Manel, do Vatapá do Manel 🍤\n\nTem vatapá de frango de novo! 🎉\n📅 Entrega {data}, a partir das {horario}\n💰 {preco} a marmita, entrega grátis\n\nAs marmitas são limitadas. Garanta a sua pelo link (é só tocar em \"Já comprei antes\" que seus dados aparecem):\n{link}",
+    pag: () => "" },
+  aviso: { rotulo: "Aviso do dia (saída + pagamento)", abertos: true,
+    padrao: "Bom dia, {nome}! Aqui é o Manel, do Vatapá do Manel 🍤\n\nHoje é o dia da sua entrega: {qtd}, total {total}.\n\n⏰ A partir das {horario} saímos para as entregas.\n\n{pagamento}\n\nQualquer mudança de endereço ou horário, é só me avisar por aqui. Obrigado! 🙏",
+    pag: (p) => pago(p) ? "Seu pagamento já está confirmado. Não precisa fazer mais nada!" : p.formaPag ? "Pagamento combinado: " + p.formaPag + "." : AV_PAG },
+  saiu: { rotulo: "Saí para entrega", abertos: true,
+    padrao: "{nome}, o Manel saiu para entregar o seu vatapá! 🛵🍤\n\nPedido: {qtd}, total {total}.\n{pagamento}\n\nEm alguns minutos estou aí. Obrigado!",
+    pag: (p) => pago(p) ? "Seu pagamento já está confirmado." : "Deixe o pagamento à mão" + (p.formaPag ? " (" + p.formaPag + ")" : " (Pix, dinheiro ou cartão)") + "." },
+  obrigado: { rotulo: "Agradecimento (depois de entregar)", abertos: false,
+    padrao: "{nome}, muito obrigado pelo seu pedido! 🙏 Espero que tenha gostado. Se puder, me conte o que achou e indique para os amigos. Até a próxima! 🍤",
+    pag: () => "" },
+};
+function abrirMensagens(modoInicial) {
+  const sel = h("select", { class: "campo", id: "avModo", "aria-label": "Mensagem" }, ...Object.entries(AV_MODOS).map(([k, v]) => h("option", { value: k, text: v.rotulo })));
+  const area = h("textarea", { class: "campo", id: "avTexto", "aria-label": "Texto da mensagem", style: "min-height:190px" });
+  const resumo = h("p", { class: "rotulo", style: "margin:0" });
+  const listaEl = h("div");
+  if (modoInicial && AV_MODOS[modoInicial]) sel.value = modoInicial;
+  const chave = () => AV_MODOS[sel.value].clientes ? "vdm-avisos-" + sel.value + "-" + estado.venda.data : "vdm-avisos-" + sel.value + "-" + (periodoAtual().valor || periodoAtual().tipo);
+  function carregar() { area.value = guarda.ler("vdm-modelo-" + sel.value) || AV_MODOS[sel.value].padrao; render(); }
+  function render() {
+    const modo = AV_MODOS[sel.value];
+    const env = guarda.ler(chave()) || {};
+    if (modo.clientes) { renderClientesNova(modo, env); return; }
+    const alvo = doPeriodo().filter((p) => modo.abertos ? (p.status === "pendente" || p.status === "saiu") : p.status === "entregue").sort((a, b) => (a.numero || 0) - (b.numero || 0));
+    resumo.textContent = alvo.length ? alvo.filter((p) => env[p.id]).length + " de " + alvo.length + " avisados" : "Nenhum cliente para esta mensagem no período.";
+    listaEl.replaceChildren(...alvo.map((p) => {
+      const fone = String(p.whatsapp || "").replace(/\D/g, "");
+      const texto = area.value.replace(/\{nome\}/g, (p.nome || "").split(" ")[0] || "tudo bem").replace(/\{qtd\}/g, plural(p.qtd, "marmita", "marmitas")).replace(/\{total\}/g, brl(p.total)).replace(/\{horario\}/g, estado.venda.horario).replace(/\{pagamento\}/g, modo.pag(p)).replace(/\n{3,}/g, "\n\n").trim();
+      const btn = fone ? h("a", { class: "btn btn-ok", href: linkWhats("55" + fone, texto), target: "_blank", rel: "noopener noreferrer", text: env[p.id] ? "De novo" : "Enviar" }) : h("span", { class: "btn btn-sec", "aria-disabled": "true", text: "Sem Whats" });
+      btn.addEventListener("click", () => { if (!fone) return; const e = guarda.ler(chave()) || {}; e[p.id] = Date.now(); guarda.gravar(chave(), e); setTimeout(render, 300); });
+      return h("div", { class: "av-item" + (env[p.id] ? " feito" : "") },
+        h("span", { class: "av-nome", text: (env[p.id] ? "✓ " : "") + n2(p.numero) + " · " + (p.nome || "Sem nome") }), btn,
+        h("span", { class: "av-meta", text: plural(p.qtd, "marmita", "marmitas") + " · " + brl(p.total) + " · " + (pago(p) ? "pago" : "a receber") }));
+    }));
+  }
+  function renderClientesNova(modo, env) {
+    const jaPediram = new Set(todos().filter((p) => vendaDe(p) === estado.venda.data && ativo(p)).map((p) => String(p.whatsapp || "").replace(/\D/g, "")));
+    const alvo = clientesDe(todos()).filter((c) => c.whatsapp && !jaPediram.has(c.whatsapp.replace(/\D/g, ""))).sort((a, b) => b.ultimo - a.ultimo);
+    resumo.textContent = alvo.length ? alvo.filter((c) => env[c.chave]).length + " de " + alvo.length + " clientes avisados da venda de " + vendaTxt(estado.venda.data) : "Nenhum cliente antigo para avisar (ou todos já pediram nesta venda).";
+    const link = CFG.site + "/?v=1&utm_source=" + (modo.utm || "aviso-clientes");
+    listaEl.replaceChildren(...alvo.map((c) => {
+      const texto = area.value.replace(/\{nome\}/g, (c.nome || "").split(" ")[0] || "tudo bem").replace(/\{data\}/g, vendaTxt(estado.venda.data)).replace(/\{horario\}/g, estado.venda.horario).replace(/\{preco\}/g, brl(estado.venda.preco)).replace(/\{link\}/g, link).trim();
+      const btn = h("a", { class: "btn btn-ok", href: linkWhats("55" + c.whatsapp.replace(/\D/g, ""), texto), target: "_blank", rel: "noopener noreferrer", text: env[c.chave] ? "De novo" : "Enviar" });
+      btn.addEventListener("click", () => { const e = guarda.ler(chave()) || {}; e[c.chave] = Date.now(); guarda.gravar(chave(), e); setTimeout(render, 300); });
+      return h("div", { class: "av-item" + (env[c.chave] ? " feito" : "") },
+        h("span", { class: "av-nome", text: (env[c.chave] ? "✓ " : "") + (c.nome || "Sem nome") }), btn,
+        h("span", { class: "av-meta", text: plural(c.pedidos.filter(ativo).length, "pedido", "pedidos") + " · último " + dataCurta(c.ultimo).split(" ")[0] + " · " + c.bairro }));
+    }));
+  }
+  sel.addEventListener("change", carregar);
+  area.addEventListener("input", () => { guarda.gravar("vdm-modelo-" + sel.value, area.value); render(); });
+  abrirFolha("Mensagens aos clientes", [
+    h("p", { class: "muted", style: "margin:0", text: "Para cada cliente, toque em Enviar: o WhatsApp abre com a mensagem pronta. Aviso, saí e obrigado valem para o período do topo; o anúncio vai para todos os clientes antigos que ainda não pediram nesta venda. Use {nome}, {data}, {preco}, {horario} e {link}." }),
+    sel, area,
+    h("div", { class: "btns-2" },
+      h("button", { type: "button", class: "btn btn-sec", text: "Texto padrão", onclick: () => { area.value = AV_MODOS[sel.value].padrao; guarda.gravar("vdm-modelo-" + sel.value, area.value); render(); } }),
+      h("button", { type: "button", class: "btn btn-sec", text: "Desmarcar enviados", onclick: () => { guarda.gravar(chave(), {}); render(); } })),
+    resumo, listaEl,
+  ], "mensagens");
+  carregar();
+}
+
+/* ---------- acessos aos links ---------- */
+const EVT = { visita: "abriu o link", iniciou: "começou a preencher", enviou: "enviou o pedido" };
+function haQuanto(iso) {
+  const s = Math.max(0, Math.round((Date.now() - Date.parse(iso)) / 1000));
+  if (s < 60) return "agora"; if (s < 3600) return "há " + Math.floor(s / 60) + " min"; if (s < 86400) return "há " + Math.floor(s / 3600) + " h"; return "há " + Math.floor(s / 86400) + " d";
+}
+async function abrirAcessos() {
+  abrirFolha("Acessos aos links", [h("p", { class: "carregando", text: "Carregando…" })], "acessos");
+  let d;
+  try { d = (await estado.db.rpc("listar_visitas", {})) || {}; }
+  catch (e) { $("folhaC").replaceChildren(h("p", { class: "muted", text: "Ainda sem dados de acessos." })); return; }
+  if (!estado.folha || estado.folha.tipo !== "acessos") return;
+  const base = [1, 2, 0].map((l) => (d.links || []).find((x) => Number(x.link) === l) || { link: l, visitantes: 0, acessos: 0, iniciaram: 0, enviaram: 0 });
+  const lista = (titulo, itens) => h("div", { class: "card" }, h("h3", { text: titulo }), itens && itens.length ? distLinhas(itens.slice(0, 6).map((i) => ({ r: i.nome, v: i.n }))) : h("p", { class: "muted", text: "Sem dados." }));
+  $("folhaC").replaceChildren(
+    h("div", { class: "kpis" }, kpi("Vendo agora", String(d.agora || 0), "últimos 5 minutos", "var(--ok)"),
+      kpi("Visitantes", String(base.reduce((t, x) => t + Number(x.visitantes), 0)), "desde o início", "var(--brand)")),
+    h("div", { class: "card" }, h("h3", { text: "Por link" }), ...base.map((x) => {
+      const taxa = x.visitantes ? Math.round((x.enviaram / x.visitantes) * 100) : 0;
+      return h("div", { class: "vis-row" }, h("b", { text: x.link ? nomeLink(x.link) : "Sem link (acesso direto)" }),
+        h("div", { class: "vis-funil" }, h("span", null, h("b", { text: String(x.visitantes) }), " visitantes"), h("span", null, h("b", { text: String(x.iniciaram) }), " começaram"), h("span", null, h("b", { text: String(x.enviaram) }), " enviaram"), h("span", null, h("b", { text: taxa + "%" }), " converteram")));
+    })),
+    lista("De onde vêm", d.origens), lista("Aparelho", d.aparelhos), d.locais && d.locais.length ? lista("Cidade", d.locais) : null,
+    h("div", { class: "card" }, h("h3", { text: "Últimos acessos" }),
+      h("ul", { class: "vis-rec" }, ...((d.recentes || []).slice(0, 15).map((r) => h("li", null, h("span", { text: (EVT[r.evento] || r.evento) + " · " + (r.link ? "link " + r.link : "sem link") + " · " + (r.origem || "?") }), h("span", { class: "muted", text: haQuanto(r.quando) })))))),
+  );
+}
+
+/* ---------- lista de espera ---------- */
+const ESP = { linhas: [], carregando: false };
+async function carregarEspera() {
+  if (!estado.db || ESP.carregando) return;
+  ESP.carregando = true;
+  try {
+    const l = (await estado.db.rpc("listar_espera", {})) || [];
+    const mudou = JSON.stringify(l) !== JSON.stringify(ESP.linhas);
+    ESP.linhas = l;
+    if (mudou) { renderTudo(); if (estado.folha && estado.folha.tipo === "espera") abrirEspera(); }
+  } catch (e) { /* sem a tabela ainda */ }
+  ESP.carregando = false;
+}
+function esperaDaVenda() { return ESP.linhas.filter((e) => e.venda === estado.venda.data); }
+function textoVaga(e) {
+  return "Oi, " + (String(e.nome).split(" ")[0] || "tudo bem") + "! Aqui é o Manel, do " + CFG.marca + " 🍤\n\nAbriu vaga para o vatapá de " + vendaTxt(e.venda) + "! Você pediu " + plural(e.qtd, "marmita", "marmitas") + " na lista de espera.\n\nPara garantir, faça o pedido aqui (toque em \"Já comprei antes\" ou preencha seus dados):\n" + CFG.site + "/?v=1&utm_source=lista-espera\n\nSe preferir, me responda aqui mesmo que eu anoto. Obrigado!";
+}
+async function marcarEspera(e, status) {
+  try { await estado.db.rpc("tratar_espera", { p_id: e.id, p_status: status }); e.status = status; if (status === "removido") ESP.linhas = ESP.linhas.filter((x) => x.id !== e.id); renderTudo(); if (estado.folha && estado.folha.tipo === "espera") abrirEspera(); }
+  catch (er) { toast(msgErro()); }
+}
+function itemEspera(e) {
+  const avisar = h("a", { class: "btn btn-ok", href: linkWhats("55" + e.whatsapp, textoVaga(e)), target: "_blank", rel: "noopener noreferrer", text: e.status === "avisado" ? "Avisar de novo" : "Avisar vaga" });
+  avisar.addEventListener("click", () => { if (e.status !== "avisado") marcarEspera(e, "avisado"); });
+  const tirar = h("button", { type: "button", class: "btn btn-sec", text: "Tirar da lista" });
+  tirar.addEventListener("click", () => {
+    if (!tirar.dataset.certeza) { tirar.dataset.certeza = "1"; tirar.textContent = "Tocar de novo"; setTimeout(() => { delete tirar.dataset.certeza; tirar.textContent = "Tirar da lista"; }, 4000); return; }
+    marcarEspera(e, "removido");
+  });
+  return h("div", { class: "pre-item" },
+    h("div", { class: "pre-top" }, h("span", { text: e.nome + (e.status === "avisado" ? " · ✓ avisado" : "") }), h("span", { class: "muted mono", text: plural(e.qtd, "marmita", "marmitas") })),
+    h("div", { class: "pre-meta", text: fmtFone(e.whatsapp) + " · entrou " + dataCurta(Date.parse(e.criado_em)) + (e.venda !== estado.venda.data ? " · venda " + vendaTxt(e.venda) : "") }),
+    h("div", { class: "pre-btns" }, avisar, tirar));
+}
+function cardEspera() {
+  const l = esperaDaVenda();
+  if (!l.length) return null;
+  const esperando = l.filter((e) => e.status === "esperando");
+  return h("div", { class: "card" },
+    h("div", { class: "pre-head" }, h("h3", null, "Lista de espera ", h("span", { class: "badge", text: String(l.length) })),
+      h("span", { class: "muted", style: "font-size:.8rem", text: soma(esperando, (e) => e.qtd) + " marmitas esperando" })),
+    ...l.slice(0, 4).map(itemEspera),
+    l.length > 4 ? h("button", { type: "button", class: "btn btn-sec btn-bloco", style: "margin-top:8px", text: "Ver lista completa (" + l.length + ")", onclick: abrirEspera }) : null);
+}
+function abrirEspera() {
+  const l = ESP.linhas.slice().sort((a, b) => (a.venda === estado.venda.data ? 0 : 1) - (b.venda === estado.venda.data ? 0 : 1) || Date.parse(a.criado_em) - Date.parse(b.criado_em));
+  abrirFolha("Lista de espera", [
+    h("p", { class: "muted", style: "margin:0", text: "Quem quis comprar quando estava esgotado ou encerrado. Toque em Avisar vaga quando aumentar o estoque ou alguém cancelar. A ordem é de quem entrou primeiro." }),
+    l.length ? h("div", null, ...l.map(itemEspera)) : h("div", { class: "card vazio" }, h("b", { text: "Ninguém na lista" }), "Quando o site esgotar, aparece um formulário de lista de espera para os clientes."),
+  ], "espera");
+}
+
+/* ---------- custos e lucro ---------- */
+const CUSTOS = { docs: new Map() };
+const CUSTO_ITENS = ["Ingredientes", "Embalagens", "Gás", "Entrega / combustível", "Outros"];
+async function carregarCustos() {
+  try { const l = (await estado.db.listar("custos")) || []; CUSTOS.docs = new Map(l.map((x) => [x.id, x.dados])); } catch (e) { /* sem custos */ }
+}
+function totalCusto(venda) { const d = CUSTOS.docs.get(venda); return d && Array.isArray(d.itens) ? soma(d.itens, (i) => i.valor) : 0; }
+function vendasNoPeriodo() {
+  const p = periodoAtual();
+  const datas = new Set([...CUSTOS.docs.keys(), ...todos().map(vendaDe)]);
+  return [...datas].filter((d) => {
+    if (p.tipo === "venda") return d === p.valor;
+    if (p.tipo === "dia") return d === p.valor;
+    if (p.tipo === "7d") return isoParaData(d).getTime() >= Date.now() - 7 * 864e5;
+    if (p.tipo === "mes") return d.slice(0, 7) === p.valor;
+    if (p.tipo === "ano") return d.slice(0, 4) === String(p.valor);
+    return true;
+  });
+}
+function cardLucro(n) {
+  const vendas = vendasNoPeriodo();
+  const custo = soma(vendas, totalCusto);
+  const lucro = n.faturamento - custo;
+  const vendaAlvo = periodoAtual().tipo === "venda" ? periodoAtual().valor : estado.venda.data;
+  return h("div", { class: "card" },
+    h("div", { class: "estq-top" }, h("h3", { text: "Custos e lucro", style: "margin:0" }),
+      h("button", { type: "button", class: "ped-acao", text: "Lançar custos", onclick: () => abrirCustos(vendaAlvo) })),
+    custo ? h("div", { class: "kpis", style: "margin-top:10px" },
+      kpi("Lucro", brl(lucro), n.faturamento ? Math.round((lucro / n.faturamento) * 100) + "% do faturamento" : "—", lucro >= 0 ? "var(--ok)" : "var(--bad)"),
+      kpi("Custos", brl(custo), plural(vendas.filter((v) => totalCusto(v)).length, "venda com custo", "vendas com custo"), "var(--bad)"),
+      kpi("Custo por marmita", brl(n.marmitas ? custo / n.marmitas : 0), "média do período", "var(--accent)"),
+      kpi("Lucro por marmita", brl(n.marmitas ? lucro / n.marmitas : 0), "média do período", "var(--ok)"))
+      : h("p", { class: "muted", style: "margin:10px 0 0", text: "Lance quanto gastou (ingredientes, embalagens, gás…) para ver o lucro de cada venda." }));
+}
+function abrirCustos(venda) {
+  const d = CUSTOS.docs.get(venda) || {};
+  let itens = Array.isArray(d.itens) && d.itens.length ? d.itens.map((i) => ({ ...i })) : CUSTO_ITENS.map((nome) => ({ nome, valor: 0 }));
+  const lista = h("div", { class: "grade-form" });
+  const totalEl = h("b", { class: "mono" });
+  const marm = soma(todos().filter((p) => vendaDe(p) === venda && ativo(p)), (p) => p.qtd);
+  const fat = soma(todos().filter((p) => vendaDe(p) === venda && ativo(p)), (p) => p.total);
+  const resumo = h("p", { class: "muted", style: "margin:0" });
+  function conta() {
+    const t = soma(itens, (i) => i.valor);
+    totalEl.textContent = brl(t);
+    resumo.textContent = "Faturamento desta venda: " + brl(fat) + " · Lucro: " + brl(fat - t) + (marm ? " · Custo por marmita: " + brl(t / marm) : "");
+  }
+  function desenhar() {
+    lista.replaceChildren(...itens.map((it, i) => {
+      const nome = h("input", { class: "campo", type: "text", value: it.nome, maxlength: "40", "aria-label": "Nome do custo" });
+      const valor = h("input", { class: "campo", type: "number", inputmode: "decimal", min: "0", step: "0.01", value: it.valor || "", placeholder: "0,00", "aria-label": "Valor de " + it.nome });
+      nome.addEventListener("input", () => { it.nome = nome.value; });
+      valor.addEventListener("input", () => { it.valor = Math.max(0, Number(String(valor.value).replace(",", ".")) || 0); conta(); });
+      const tirar = h("button", { type: "button", class: "fechar", "aria-label": "Remover " + it.nome, text: "×", onclick: () => { itens.splice(i, 1); desenhar(); conta(); } });
+      return h("div", { style: "display:grid;grid-template-columns:1fr 120px auto;gap:8px;align-items:center" }, nome, valor, tirar);
+    }));
+  }
+  desenhar(); conta();
+  const salvar = h("button", { type: "button", class: "btn btn-pri btn-bloco", text: "Salvar custos" });
+  salvar.addEventListener("click", async () => {
+    salvar.disabled = true;
+    const limpos = itens.filter((i) => String(i.nome || "").trim()).map((i) => ({ nome: limpa(i.nome, 40), valor: Math.round((Number(i.valor) || 0) * 100) / 100 }));
+    try { await estado.db.gravar("custos", venda, { itens: limpos, atualizadoEm: Date.now() }, false); CUSTOS.docs.set(venda, { itens: limpos }); fecharFolha(); renderTudo(); toast("Custos salvos."); }
+    catch (e) { salvar.disabled = false; toast(msgErro()); }
+  });
+  const vendas = [...new Set([estado.venda.data, ...todos().map(vendaDe), ...CUSTOS.docs.keys()])].sort().reverse();
+  const selVenda = h("select", { class: "campo", "aria-label": "Venda" }, ...vendas.map((v) => h("option", { value: v, text: "Venda de " + vendaTxt(v), selected: v === venda })));
+  selVenda.addEventListener("change", () => abrirCustos(selVenda.value));
+  abrirFolha("Custos da venda", [
+    selVenda,
+    h("p", { class: "muted", style: "margin:0", text: "Lance o que gastou para produzir e entregar esta venda. Pode mudar os nomes ou acrescentar itens." }),
+    lista,
+    h("button", { type: "button", class: "btn btn-sec btn-bloco", text: "+ Adicionar item", onclick: () => { itens.push({ nome: "", valor: 0 }); desenhar(); const ins = lista.querySelectorAll("input[type=text]"); ins[ins.length - 1].focus(); } }),
+    h("div", { class: "card estq-top" }, h("span", { text: "Total de custos" }), totalEl),
+    resumo,
+    salvar,
+  ], "custos");
+}
+
+/* ---------- exportar planilha ---------- */
+function exportarPlanilha() {
+  const arr = doPeriodo().sort((a, b) => vendaDe(a).localeCompare(vendaDe(b)) || (a.numero || 0) - (b.numero || 0));
+  if (!arr.length) { toast("Nenhum pedido no período para exportar."); return; }
+  const num = (v) => (Math.round((Number(v) || 0) * 100) / 100).toFixed(2).replace(".", ",");
+  const dt = (ms) => { if (!ms) return ""; const d = new Date(ms); return n2(d.getDate()) + "/" + n2(d.getMonth() + 1) + "/" + d.getFullYear() + " " + n2(d.getHours()) + ":" + n2(d.getMinutes()); };
+  const cel = (v) => { const s = String(v == null ? "" : v); return /[;"\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+  const cab = ["Venda (entrega)", "Nº", "Código", "Reservado em", "Cliente", "WhatsApp", "Endereço", "Bairro", "Marmitas", "Preço", "Total", "Situação", "Pagamento", "Forma escolhida pelo cliente", "Link", "Saiu em", "Entregue em"];
+  const linhas = arr.map((p) => [
+    isoParaData(vendaDe(p)).toLocaleDateString("pt-BR"), n2(p.numero), p.codigo, dt(quandoDe(p)), p.nome, p.whatsapp ? fmtFone(p.whatsapp) : "", ruaDe(p), bairroDe(p),
+    p.qtd, num(p.preco || (p.total / (p.qtd || 1))), num(p.total), STATUS_TXT[p.status] || "Reservado", PAGTO_TXT[p.pagamento] || "A receber", p.formaPag || "",
+    Number(p.link) ? nomeLink(Number(p.link)) : "Sem link", dt(p.saiuEm), dt(p.entregueEm)]);
+  const csv = "\ufeff" + [cab, ...linhas].map((l) => l.map(cel).join(";")).join("\r\n");
+  const nomeArq = "vatapa-pedidos-" + rotuloPeriodo().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") + ".csv";
+  try {
+    const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+    const a = h("a", { href: url, download: nomeArq, style: "display:none" });
+    document.body.append(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 2000);
+    toast("Planilha baixada: " + plural(arr.length, "pedido", "pedidos") + ". Abre no Excel ou Planilhas Google.");
+  } catch (e) { abrirTexto("Planilha", "Não deu para baixar. Copie o texto e cole numa planilha.", csv, false); }
+}
+
+/* ---------- disparar mensagens prontas ---------- */
+function cardDisparos() {
+  const hoje = ymd(Date.now()) === estado.venda.data;
+  const env = (m) => Object.keys(guarda.ler("vdm-avisos-" + m + "-" + estado.venda.data) || {}).length;
+  const botao = (modo, titulo, sub) => h("button", { type: "button", class: "menu-item", onclick: () => abrirMensagens(modo) },
+    h("span", { text: titulo }), h("small", { text: sub }));
+  return h("div", { class: "card menu", style: "padding:0" },
+    h("div", { style: "padding:12px 14px 4px" }, h("h3", { style: "margin:0", text: "Disparar mensagens prontas" }),
+      h("p", { class: "muted", style: "margin:2px 0 0;font-size:.84rem", text: "Escolha a mensagem: a lista de clientes aparece com o botão Enviar de cada um." })),
+    hoje ? botao("lembrete", "🔔 Lembrete: é hoje!", env("lembrete") ? env("lembrete") + " avisados" : "quem ainda não pediu") : null,
+    botao("nova", "📣 Anunciar a venda", env("nova") ? env("nova") + " avisados" : "clientes antigos"),
+    botao("aviso", "⏰ Aviso do dia + pagamento", "quem já reservou"),
+    botao("saiu", "🛵 Saí para entrega", "pedidos em aberto"),
+    botao("obrigado", "🙏 Agradecimento", "pedidos entregues"),
+    hoje ? null : botao("lembrete", "🔔 Lembrete da venda", "quem ainda não pediu"));
+}
+
+/* ---------- pré-reservas do site ---------- */
+const PRE = { linhas: [], vistos: null, carregando: false, erro: false };
+async function carregarPre() {
+  if (!estado.db || PRE.carregando) return;
+  PRE.carregando = true;
+  try {
+    const linhas = (await estado.db.rpc("listar_pre_reservas", {})) || [];
+    const rows = linhas.filter((r) => !estado.pedidos.has(r.codigo));
+    const novas = PRE.vistos ? rows.filter((r) => !PRE.vistos.has(r.codigo)) : [];
+    PRE.vistos = new Set(rows.map((r) => r.codigo));
+    const mudou = JSON.stringify(rows) !== JSON.stringify(PRE.linhas);
+    PRE.linhas = rows; PRE.erro = false;
+    PRE.novas = new Set(novas.map((r) => r.codigo));
+    if (novas.length) alertarNovas(novas);
+    $("navPre").textContent = rows.length; $("navPre").hidden = !rows.length;
+    if (mudou || novas.length) renderTudo();
+  } catch (e) { PRE.erro = true; }
+  PRE.carregando = false;
+}
+function cardPre() {
+  if (!PRE.linhas.length) return null;
+  return h("div", { class: "card pre" },
+    h("div", { class: "pre-head" }, h("h3", null, "Pré-reservas do site ", h("span", { class: "badge", text: String(PRE.linhas.length) })),
+      h("span", { class: "muted", style: "font-size:.8rem", text: "confirme quando chegar no WhatsApp" })),
+    ...PRE.linhas.map((r) => {
+      const conf = h("button", { type: "button", class: "btn btn-pri", text: "Confirmar (" + r.qtd + ")" });
+      const desc = h("button", { type: "button", class: "btn btn-sec", text: "Descartar" });
+      conf.addEventListener("click", () => confirmarPre(r, conf, desc));
+      desc.addEventListener("click", () => descartarPre(r, conf, desc));
+      return h("div", { class: "pre-item" + (PRE.novas && PRE.novas.has(r.codigo) ? " nova" : "") },
+        h("div", { class: "pre-top" }, h("span", { text: r.nome + (MP.pagos.has(r.codigo) ? " · 💳 já pagou" : "") }), h("span", { class: "muted mono", text: "#" + r.codigo })),
+        h("div", { class: "pre-meta", text: plural(r.qtd, "marmita", "marmitas") + " · " + brl(r.qtd * (Number(estado.venda.preco) || 20)) + " · " + (CFG.links[r.link] || "sem link") + " · " + dataCurta(Date.parse(r.criado_em)) }),
+        h("div", { class: "pre-meta", text: (r.whatsapp ? fmtFone(r.whatsapp) + " · " : "") + r.endereco }),
+        r.pagamento ? h("div", { class: "pre-meta", text: "Pagamento: " + r.pagamento }) : null,
+        h("div", { class: "pre-btns" }, conf, desc));
+    }));
+}
+async function confirmarPre(r, conf, desc) {
+  conf.disabled = true; desc.disabled = true;
+  try {
+    await registrar([{ codigo: r.codigo, nome: r.nome, whatsapp: r.whatsapp, endereco: r.endereco, qtd: r.qtd, link: r.link, pagamento: r.pagamento || "" }]);
+    await estado.db.rpc("tratar_pre_reserva", { p_codigo: r.codigo, p_acao: "confirmada" });
+    PRE.linhas = PRE.linhas.filter((x) => x.codigo !== r.codigo);
+    toast("Pedido de " + r.nome + " confirmado.");
+    aplicarMp();
+    renderTudo();
+  } catch (e) { conf.disabled = false; desc.disabled = false; toast("Não deu para confirmar agora. Tente de novo."); }
+  carregarPre();
+}
+async function descartarPre(r, conf, desc) {
+  if (!desc.dataset.certeza) { desc.dataset.certeza = "1"; desc.textContent = "Tocar de novo"; setTimeout(() => { delete desc.dataset.certeza; desc.textContent = "Descartar"; }, 4000); return; }
+  conf.disabled = true; desc.disabled = true;
+  try {
+    await estado.db.rpc("tratar_pre_reserva", { p_codigo: r.codigo, p_acao: "descartada" });
+    PRE.linhas = PRE.linhas.filter((x) => x.codigo !== r.codigo);
+    toast("Pré-reserva descartada.");
+    renderTudo();
+  } catch (e) { conf.disabled = false; desc.disabled = false; toast(msgErro()); }
+}
+
+/* ---------- Mercado Pago ---------- */
+const MP = { pagos: new Map(), aplicados: new Set(), carregando: false };
+async function carregarMp() {
+  if (!estado.db || MP.carregando) return;
+  MP.carregando = true;
+  try {
+    const linhas = (await estado.db.rpc("mp_pagamentos", {})) || [];
+    MP.pagos = new Map();
+    for (const l of linhas) { const ja = MP.pagos.get(l.codigo); MP.pagos.set(l.codigo, { ...l, valor: Number(l.valor) + (ja ? Number(ja.valor) : 0) }); }
+    aplicarMp();
+  } catch (e) { /* sem Mercado Pago */ }
+  MP.carregando = false;
+}
+function aplicarMp() {
+  if (!estado.carregado) return;
+  for (const p of estado.pedidos.values()) {
+    const pg = MP.pagos.get(p.id);
+    if (!pg || pago(p) || !ativo(p) || MP.aplicados.has(p.id)) continue;
+    MP.aplicados.add(p.id);
+    if (Number(pg.valor) + 0.01 < Number(p.total)) { toast("Mercado Pago: " + (p.nome || "cliente") + " pagou " + brl(pg.valor) + ", mas o pedido é " + brl(p.total) + ". Confira."); continue; }
+    mudar(p.id, { pagamento: pg.tipo === "pix" ? "pix" : "cartao", mpPagamento: String(pg.payment_id) }).then((ok) => {
+      if (ok) { toast("💳 Pagamento recebido no Mercado Pago: " + (p.nome || "cliente") + " (" + brl(pg.valor) + ")"); tocarAlerta(); }
+      else MP.aplicados.delete(p.id);
+    });
+  }
+}
+
+/* ---------- alerta: som, vibração e título ---------- */
+const ALERTA = { ctx: null, som: guarda.ler("vdm-som") !== false, titulo: document.title, piscar: 0 };
+function destravarSom() {
+  try { if (!ALERTA.ctx) ALERTA.ctx = new (window.AudioContext || window.webkitAudioContext)(); if (ALERTA.ctx.state === "suspended") ALERTA.ctx.resume(); } catch (e) { /* sem áudio */ }
+}
+document.addEventListener("pointerdown", destravarSom, { passive: true });
+function tocarAlerta() {
+  try { if (navigator.vibrate) navigator.vibrate([200, 100, 200]); } catch (e) { /* sem vibração */ }
+  if (!ALERTA.som || !ALERTA.ctx || ALERTA.ctx.state !== "running") return;
+  const c = ALERTA.ctx, t0 = c.currentTime;
+  [[880, 0], [1175, 0.18], [1568, 0.36]].forEach(([f, d]) => {
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = "sine"; o.frequency.value = f;
+    g.gain.setValueAtTime(0.0001, t0 + d); g.gain.exponentialRampToValueAtTime(0.35, t0 + d + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t0 + d + 0.28);
+    o.connect(g); g.connect(c.destination); o.start(t0 + d); o.stop(t0 + d + 0.3);
+  });
+}
+function alertarNovas(novas) {
+  tocarAlerta();
+  toast(novas.length === 1 ? "🔔 Nova pré-reserva: " + novas[0].nome + " (" + novas[0].qtd + ")" : "🔔 " + novas.length + " novas pré-reservas.");
+  clearInterval(ALERTA.piscar);
+  let lig = false;
+  ALERTA.piscar = setInterval(() => {
+    if (!document.hidden) { clearInterval(ALERTA.piscar); document.title = ALERTA.titulo; return; }
+    lig = !lig; document.title = lig ? "🔔 (" + novas.length + ") Nova pré-reserva!" : ALERTA.titulo;
+  }, 900);
+}
+function rotuloSom() { $("bSom").setAttribute("aria-pressed", String(ALERTA.som)); $("bSom").style.opacity = ALERTA.som ? "1" : ".45"; $("bSom").title = ALERTA.som ? "Som ligado" : "Som desligado"; }
+function alternarSom() { ALERTA.som = !ALERTA.som; guarda.gravar("vdm-som", ALERTA.som); destravarSom(); rotuloSom(); if (ALERTA.som) tocarAlerta(); toast(ALERTA.som ? "Som dos avisos ligado." : "Som dos avisos desligado."); }
+$("bSom").addEventListener("click", alternarSom);
+rotuloSom();
+
+/* ---------- entrada com o código do dono ---------- */
+function mostrarEntrada(aviso) {
+  const campo = h("input", { class: "campo", type: "password", placeholder: "Código do dono", "aria-label": "Código do dono", autocomplete: "current-password" });
+  const erro = h("p", { class: "err", role: "alert", text: aviso || "" });
+  erro.hidden = !aviso;
+  const botao = h("button", { type: "submit", class: "btn btn-pri btn-bloco", text: "Entrar" });
+  const form = h("form", { class: "entrada-card" }, h("img", { src: "/icones/painel-192.png", alt: "" }), h("h1", { text: "Painel do Manel" }), h("p", { class: "muted", style: "margin:0", text: "Digite o código do dono. Ele fica guardado só neste aparelho." }), campo, erro, botao);
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const v = campo.value.trim();
+    if (!v) return;
+    botao.disabled = true; erro.hidden = true;
+    try { await criarBanco(v).ler("config", "estoque"); guarda.gravar("vdm-token", v); $("entrada").remove(); entrar(v); }
+    catch (er) { erro.textContent = er.code === "denied" ? "Esse código não foi aceito." : "Não consegui falar com o banco. Confira a internet."; erro.hidden = false; botao.disabled = false; }
+  });
+  const antigo = $("entrada"); if (antigo) antigo.remove();
+  document.body.append(h("div", { class: "entrada", id: "entrada" }, form));
+  campo.focus();
+}
+let timers = [];
+async function entrar(token) {
+  estado.token = token;
+  estado.db = criarBanco(token);
+  await carregarVenda();
+  await carregarPedidos();
+  mostrarView(estado.view);
+  carregarPre(); carregarMp(); carregarEspera();
+  carregarCustos().then(renderTudo);
+  timers.forEach(clearInterval);
+  timers = [
+    setInterval(() => { if (!document.hidden) carregarPedidos(); }, 5000),
+    setInterval(carregarPre, 10000),
+    setInterval(() => { if (!document.hidden) { carregarMp(); carregarVenda(); carregarEspera(); carregarCustos(); } }, 20000),
+  ];
+}
+async function iniciar() {
+  const salvo = guarda.ler("vdm-token");
+  if (!salvo) { mostrarEntrada(""); return; }
+  try { await criarBanco(salvo).ler("config", "estoque"); entrar(salvo); }
+  catch (er) {
+    if (er.code === "denied") { guarda.gravar("vdm-token", null); mostrarEntrada("O código guardado não vale mais. Digite de novo."); }
+    else mostrarEntrada("Não consegui falar com o banco. Confira a internet e digite o código.");
+  }
+}
+
+/* ---------- ligações ---------- */
+document.querySelectorAll(".nav button").forEach((b) => b.addEventListener("click", () => mostrarView(b.dataset.view)));
+$("bPeriodo").addEventListener("click", abrirPeriodo);
+$("fab").addEventListener("click", () => abrirNovo("manual"));
+$("bAtualizar").addEventListener("click", async () => { estado.assinatura = ""; await carregarVenda(); await carregarPedidos(); carregarPre(); carregarMp(); carregarEspera(); await carregarCustos(); renderTudo(); toast("Atualizado."); });
+document.addEventListener("visibilitychange", () => { if (!document.hidden && estado.db) { carregarPedidos(); carregarPre(); } });
+iniciar();
+})();
+
+/* ---------- app instalável ---------- */
+(function appInstalavel() {
+  try { if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("/sw.js").catch(() => {}); } catch (e) { /* sem app */ }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+# Publica o site no Cloudflare Pages (projeto "vatapadomanel") a cada mudança na branch main.
+# Precisa de UM segredo no GitHub: Settings → Secrets and variables → Actions → CLOUDFLARE_API_TOKEN
+# (token do Cloudflare com a permissão "Cloudflare Pages: Edit").
+name: Publicar no Cloudflare Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Separar só os arquivos do site
+        run: |
+          mkdir -p _site
+          rsync -a --exclude='.git' --exclude='.github' --exclude='_site' --exclude='README.md' ./ _site/
+          ls -R _site | head -40
+      - name: Publicar
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: a09ae89c996dd5385c5588868540aa84
+          command: pages deploy _site --project-name=vatapadomanel --branch=main --commit-dirty=true
